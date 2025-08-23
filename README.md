@@ -3,7 +3,7 @@
 <details><summary>Study Info</summary>
 <p>
 
-📢 GPU/CUDA 프로그래밍을 배워보세요! 북클럽 나란에서 두 가지 레벨의 스터디를 모집합니다. 📢
+[📢 GPU/CUDA 프로그래밍을 배워보세요! 북클럽 나란에서 두 가지 레벨의 스터디를 모집합니다. 📢](https://www.linkedin.com/posts/sungjuc_gpucuda-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%8A%A4%ED%84%B0%EB%94%94-%EC%B0%B8%EA%B0%80-%EC%8B%A0%EC%B2%AD%ED%8F%BC-activity-7361337346170003457-rZhS?utm_source=share&utm_medium=member_desktop&rcm=ACoAADxDAfgBHmsGgos6Xqn5TZXS7NqO4fcxRGc)
 
 최근 AI 열풍으로 AI Engineering 분야도 상당히 뜨겁습니다.
 AI Engineering에서 GPU/CUDA 아키텍쳐는 반드시 알아야할 핵심 지식입니다.
@@ -30,7 +30,7 @@ AI Engineering에서 GPU/CUDA 아키텍쳐는 반드시 알아야할 핵심 지�
   - 상담 카톡방: <https://open.kakao.com/o/gitHslMh>
   - 상담 이메일: <admin@cyberseowon.com>
 
-참가를 원하시는 분들은 참가 신청폼을 작성해주세요.
+참가를 원하시는 분들은 [참가 신청폼](https://docs.google.com/forms/d/e/1FAIpQLSf6ADaK-RAz_YlZLIamdQx-_UiqUXSP8TSKbIt3ZbBuglyCjQ/viewform)을 작성해주세요.
 참가 신청폼을 작성해주신 분들에게는 자세한 참가 방법을 보내드립니다.
 (정원이 초과하는 경우 신청폼의 내용을 기반으로 참가지를 선정할 수 있습니다.)
 
