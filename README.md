@@ -1,6 +1,13 @@
 <h2 align="center">⚒️ GPU/CUDA 프로그래밍 스터디 ⚒️</h2>
 
-<details><summary>Study Info</summary>
+- [Book](https://www.amazon.com/CUDA-Example-Introduction-General-Purpose-Programming/dp/0131387685)
+- [Udemy](https://www.udemy.com/course/cuda-course/)
+
+<details><summary>
+    <a href="https://www.cyberseowon.com/forum/teugbyeolmoim/2025nyeon-9weol-membeosib-cuda-gpu-peurogeuraeming-ibmunban">
+        Study Info
+    </a>
+</summary>
 <p>
 
 [📢 GPU/CUDA 프로그래밍을 배워보세요! 북클럽 나란에서 두 가지 레벨의 스터디를 모집합니다. 📢](https://www.linkedin.com/posts/sungjuc_gpucuda-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%8A%A4%ED%84%B0%EB%94%94-%EC%B0%B8%EA%B0%80-%EC%8B%A0%EC%B2%AD%ED%8F%BC-activity-7361337346170003457-rZhS?utm_source=share&utm_medium=member_desktop&rcm=ACoAADxDAfgBHmsGgos6Xqn5TZXS7NqO4fcxRGc)
