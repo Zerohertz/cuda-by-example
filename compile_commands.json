@@ -1,0 +1,17 @@
+[
+  {
+    "arguments": [
+      "/usr/local/cuda/bin/nvcc",
+      "-c",
+      "-x",
+      "cu",
+      "-std=c++20",
+      "-o",
+      "src/chapter03/01_hello_world",
+      "src/chapter03/01_hello_world.cu"
+    ],
+    "directory": "/workspace",
+    "file": "/workspace/src/chapter03/01_hello_world.cu",
+    "output": "/workspace/src/chapter03/01_hello_world"
+  }
+]
