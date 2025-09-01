@@ -1,7 +1,9 @@
-#include "../common/book.h"
+#include <iostream>
+
+using namespace std;
 
 int main(void)
 {
-    printf("Hello, World!\n");
+    cout << "Hello, World!" << endl;
     return 0;
 }

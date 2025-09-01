@@ -19,6 +19,8 @@
 
 static void HandleError(cudaError_t err, const char *file, int line)
 {
+    // NOTE:
+    // cudaDeviceSynchronize();를 넣어도 에러 핸들링이 되지 않는다.
     if (err != cudaSuccess) {
         printf("%s in %s at line %d\n", cudaGetErrorString(err), file, line);
         exit(EXIT_FAILURE);
