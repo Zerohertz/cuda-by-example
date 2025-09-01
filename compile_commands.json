@@ -7,6 +7,21 @@
       "cu",
       "-std=c++20",
       "-o",
+      "src/chapter03/02_kernel_call",
+      "src/chapter03/02_kernel_call.cu"
+    ],
+    "directory": "/workspace",
+    "file": "/workspace/src/chapter03/02_kernel_call.cu",
+    "output": "/workspace/src/chapter03/02_kernel_call"
+  },
+  {
+    "arguments": [
+      "/usr/local/cuda/bin/nvcc",
+      "-c",
+      "-x",
+      "cu",
+      "-std=c++20",
+      "-o",
       "src/chapter03/01_hello_world",
       "src/chapter03/01_hello_world.cu"
     ],
