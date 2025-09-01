@@ -37,6 +37,7 @@ init:
 	apt-get install -y \
 	clang-tidy clang-format
 	uv pip install pre-commit
+	pre-commit install
 
 # Code quality tools
 lint:
