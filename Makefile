@@ -1,10 +1,10 @@
 SHELL := /bin/zsh
 CONTAINER_NAME := gpu
 NVCC := nvcc
-NVCC_FLAGS := -x cu -std=c++20 -gencode arch=compute_90,code=sm_90
+NVCC_FLAGS := -x cu -std c++17 --gpu-architecture compute_90 --gpu-code sm_90
 
 .DEFAULT_GOAL := help
-.PHONY: docker exec stop rm run compile clean bear help
+.PHONY: docker exec stop rm init lint format build run compile clean bear help
 
 # Prevent make from trying to build the file arguments as targets
 $(FILE_ARG):
@@ -14,7 +14,7 @@ $(FILE_ARG):
 FILE_ARG = $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
 FILE_PATH = $(firstword $(FILE_ARG))
 
-# Docker management
+# Docker container management
 docker:
 	docker run \
 	-d --name $(CONTAINER_NAME) \
@@ -30,6 +30,29 @@ stop:
 
 rm:
 	docker rm -f $(CONTAINER_NAME)
+
+# Initialize development environment
+init:
+	apt-get update && \
+	apt-get install -y \
+	clang-tidy clang-format
+	uv pip install pre-commit
+
+# Code quality tools
+lint:
+	find src -name "*.cu" -o -name "*.h" | xargs clang-tidy -p build -fix
+
+format:
+	find src -name "*.cu" -o -name "*.h" | xargs clang-format -i
+
+# Generate CMake build directory
+# Usage: make build
+build:
+	rm -rf build && \
+	cmake -S . -B build \
+	-DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+	-DCMAKE_CXX_COMPILER=clang++ \
+	-DCMAKE_CUDA_COMPILER=clang++
 
 # Compile, run, and clean up CUDA file
 # Usage: make run src/chapter03/01_hello_world.cu
@@ -50,7 +73,7 @@ compile:
 clean:
 	find ./src -type f -executable ! -name "*.cu" ! -name "*.cpp" ! -name "*.c" ! -name "*.h" ! -name "*.sh" ! -name "*.py" -delete
 
-# Generate compile_commands.json with bear
+# Generate compile_commands.json for IDE support with bear
 # Usage: make bear src/chapter03/01_hello_world.cu
 bear:
 	@if [ -z "$(FILE_PATH)" ]; then echo "Usage: make bear <path/to/file.cu>"; exit 1; fi
@@ -59,17 +82,23 @@ bear:
 # Show help
 help:
 	@echo "Available targets:"
-	@echo "  Docker commands:"
+	@echo "  Docker container management:"
 	@echo "    docker   - Start GPU-enabled Docker container"
-	@echo "    exec     - Execute bash in running container"
+	@echo "    exec     - Execute zsh in running container"
 	@echo "    stop     - Stop the container"
 	@echo "    rm       - Remove the container"
+	@echo ""
+	@echo "  Development environment:"
+	@echo "    init     - Initialize development environment with clang tools and pre-commit"
+	@echo "    build    - Generate CMake build directory"
+	@echo "    lint     - Run clang-tidy to fix code issues"
+	@echo "    format   - Format code with clang-format"
 	@echo ""
 	@echo "  CUDA compilation:"
 	@echo "    run      - Compile, run, and clean up CUDA file"
 	@echo "    compile  - Compile CUDA file only"
 	@echo "    clean    - Remove all compiled binaries"
-	@echo "    bear     - Generate compile_commands.json with bear"
+	@echo "    bear     - Generate compile_commands.json for IDE support"
 	@echo ""
 	@echo "Usage: make <target> <path/to/file.cu>"
 	@echo "Example: make run src/chapter03/01_hello_world.cu"
