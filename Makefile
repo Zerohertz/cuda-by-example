@@ -1,7 +1,7 @@
 SHELL := /bin/zsh
 CONTAINER_NAME := gpu
 NVCC := nvcc
-NVCC_FLAGS := -x cu -std=c++20
+NVCC_FLAGS := -x cu -std=c++20 -gencode arch=compute_90,code=sm_90
 
 .DEFAULT_GOAL := help
 .PHONY: docker exec stop rm run compile clean bear help
