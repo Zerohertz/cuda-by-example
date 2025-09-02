@@ -1,4 +1,5 @@
-<h2 align="center">⚒️ GPU/CUDA 프로그래밍 스터디 ⚒️</h2>
+<h2 align="center">⚒️ CUDA by Example ⚒️</h2>
+<h4 align="center">An Introduction to General-Purpose GPU Programming</h4>
 
 - [Book](https://www.amazon.com/CUDA-Example-Introduction-General-Purpose-Programming/dp/0131387685)
 - [Udemy](https://www.udemy.com/course/cuda-course/)
