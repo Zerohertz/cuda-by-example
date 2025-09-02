@@ -6,6 +6,7 @@ cmake_minimum_required(VERSION 3.20)
 project(cuda-gpu-programming-study LANGUAGES C CXX CUDA)
 
 find_package(CUDAToolkit REQUIRED)
+find_package(OpenGL REQUIRED)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
@@ -30,6 +31,11 @@ endif()
 # set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --extended-lambda")
 
 include_directories(src/common)
+file(GLOB_RECURSE ALL_CPP_SOURCES "src/*.cpp")
+foreach(cpp_source ${ALL_CPP_SOURCES})
+  get_filename_component(executable_name ${cpp_source} NAME_WE)
+  add_executable(${executable_name} ${cpp_source})
+endforeach()
 file(GLOB_RECURSE ALL_CU_SOURCES "src/*.cu")
 foreach(cu_source ${ALL_CU_SOURCES})
   get_filename_component(executable_name ${cu_source} NAME_WE)

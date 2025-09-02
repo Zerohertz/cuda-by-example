@@ -35,16 +35,17 @@ rm:
 init:
 	apt-get update && \
 	apt-get install -y \
-	clang-tidy clang-format
+	clang-tidy clang-format \
+	libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev
 	uv pip install pre-commit
 	pre-commit install
 
 # Code quality tools
 lint:
-	find src -name "*.cu" -o -name "*.h" | xargs clang-tidy -p build -fix
+	find src -name "*.cu" -o -name "*.cpp" -o -name "*.h" | xargs clang-tidy -p build -fix
 
 format:
-	find src -name "*.cu" -o -name "*.h" | xargs clang-format -i
+	find src -name "*.cu" -o -name "*.cpp" -o -name "*.h" | xargs clang-format -i
 
 # Generate CMake build directory
 # Usage: make build
