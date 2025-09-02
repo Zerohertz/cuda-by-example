@@ -1,6 +1,96 @@
 <h2 align="center">⚒️ CUDA by Example ⚒️</h2>
 <h4 align="center">An Introduction to General-Purpose GPU Programming</h4>
 
+<h3 align="center">👷 Setup 👷</h3>
+
+```bash
+$ make docker
+docker run \
+-d --name gpu \
+-v ./:/workspace \
+-w /workspace \
+zerohertzkr/gpu
+566c42b4cc083fff284fd35b518465552699ebda67162987d755fb812da51c9a
+```
+
+```bash
+$ make exec
+docker exec -it gpu zsh
+```
+
+```bash
+$ make init
+apt-get update && \
+apt-get install -y \
+clang-tidy clang-format
+Get:1 https://apt.releases.hashicorp.com noble InRelease [12.9 kB]
+Get:2 https://apt.releases.hashicorp.com noble/main amd64 Packages [247 kB]
+Get:3 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64  InRelease [1,581 B]
+Get:4 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Hit:5 http://archive.ubuntu.com/ubuntu noble InRelease
+```
+
+```bash
+$ make rm
+docker rm -f gpu
+gpu
+```
+
+<h3 align="center">⚙️ Build & Run ⚙️</h3>
+
+```bash
+$ make build
+rm -rf build && \
+cmake -S . -B build \
+-DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+-DCMAKE_CXX_COMPILER=clang++ \
+-DCMAKE_CUDA_COMPILER=clang++
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is Clang 18.1.3
+-- The CUDA compiler identification is Clang 18.1.3
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/bin/clang++ - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Found CUDAToolkit: /usr/local/cuda/include (found version "12.6.85")
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (2.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /workspace/build
+```
+
+```bash
+$ cd build
+$ make 01_hello_world && ./01_hello_world
+[ 50%] Building CUDA object CMakeFiles/01_hello_world.dir/src/chapter03/01_hello_world.cu.o
+clang++: warning: CUDA version is newer than the latest supported version 12.3 [-Wunknown-cuda-version]
+clang++: warning: -lineinfo: 'linker' input unused [-Wunused-command-line-argument]
+warning: unknown warning option '-Wno-deprecated-gpu-targets'; did you mean '-Wno-deprecated-pragma'? [-Wunknown-warning-option]
+1 warning generated when compiling for sm_90.
+warning: unknown warning option '-Wno-deprecated-gpu-targets'; did you mean '-Wno-deprecated-pragma'? [-Wunknown-warning-option]
+1 warning generated when compiling for host.
+[100%] Linking CUDA executable 01_hello_world
+[100%] Built target 01_hello_world
+Hello, World!
+```
+
+---
+
+<h3 align="center">📖 Study Info 📖</h3>
+
 - [Book](https://www.amazon.com/CUDA-Example-Introduction-General-Purpose-Programming/dp/0131387685)
 - [Udemy](https://www.udemy.com/course/cuda-course/)
 
