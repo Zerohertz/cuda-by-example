@@ -45,159 +45,159 @@ int main(void)
 }
 
 /*
-===== General Information for Device 0 =====
-Name:   NVIDIA H100 80GB HBM3
-Compute Capability:     9.0
-Clock Rate:     1980000
-Device Copy Overlap:    Enabled
-Kernel Execition Timeout:       Disabled
-===== Memory Information for Device 0 =====
-Total Global Mem:       84929216512
-Total Constant Mem:     65536
-Max Mem pitch:  2147483647
-Texture Alignment:      512
-===== MP Information for Device 0 =====
-Multiprocessor Count:   132
-Shared Mem per MP:      49152
-Registers per MP:       65536
-Threads in Warp:        32
-Max Threads per Block:  1024
-Max Trhead Dimensions:  (1024, 1024, 64)
-Max Grid Dimensions:    (2147483647, 65535, 65535)
-===== General Information for Device 1 =====
-Name:   NVIDIA H100 80GB HBM3
-Compute Capability:     9.0
-Clock Rate:     1980000
-Device Copy Overlap:    Enabled
-Kernel Execition Timeout:       Disabled
-===== Memory Information for Device 1 =====
-Total Global Mem:       84929216512
-Total Constant Mem:     65536
-Max Mem pitch:  2147483647
-Texture Alignment:      512
-===== MP Information for Device 1 =====
-Multiprocessor Count:   132
-Shared Mem per MP:      49152
-Registers per MP:       65536
-Threads in Warp:        32
-Max Threads per Block:  1024
-Max Trhead Dimensions:  (1024, 1024, 64)
-Max Grid Dimensions:    (2147483647, 65535, 65535)
-===== General Information for Device 2 =====
-Name:   NVIDIA H100 80GB HBM3
-Compute Capability:     9.0
-Clock Rate:     1980000
-Device Copy Overlap:    Enabled
-Kernel Execition Timeout:       Disabled
-===== Memory Information for Device 2 =====
-Total Global Mem:       84929216512
-Total Constant Mem:     65536
-Max Mem pitch:  2147483647
-Texture Alignment:      512
-===== MP Information for Device 2 =====
-Multiprocessor Count:   132
-Shared Mem per MP:      49152
-Registers per MP:       65536
-Threads in Warp:        32
-Max Threads per Block:  1024
-Max Trhead Dimensions:  (1024, 1024, 64)
-Max Grid Dimensions:    (2147483647, 65535, 65535)
-===== General Information for Device 3 =====
-Name:   NVIDIA H100 80GB HBM3
-Compute Capability:     9.0
-Clock Rate:     1980000
-Device Copy Overlap:    Enabled
-Kernel Execition Timeout:       Disabled
-===== Memory Information for Device 3 =====
-Total Global Mem:       84929216512
-Total Constant Mem:     65536
-Max Mem pitch:  2147483647
-Texture Alignment:      512
-===== MP Information for Device 3 =====
-Multiprocessor Count:   132
-Shared Mem per MP:      49152
-Registers per MP:       65536
-Threads in Warp:        32
-Max Threads per Block:  1024
-Max Trhead Dimensions:  (1024, 1024, 64)
-Max Grid Dimensions:    (2147483647, 65535, 65535)
-===== General Information for Device 4 =====
-Name:   NVIDIA H100 80GB HBM3
-Compute Capability:     9.0
-Clock Rate:     1980000
-Device Copy Overlap:    Enabled
-Kernel Execition Timeout:       Disabled
-===== Memory Information for Device 4 =====
-Total Global Mem:       84929216512
-Total Constant Mem:     65536
-Max Mem pitch:  2147483647
-Texture Alignment:      512
-===== MP Information for Device 4 =====
-Multiprocessor Count:   132
-Shared Mem per MP:      49152
-Registers per MP:       65536
-Threads in Warp:        32
-Max Threads per Block:  1024
-Max Trhead Dimensions:  (1024, 1024, 64)
-Max Grid Dimensions:    (2147483647, 65535, 65535)
-===== General Information for Device 5 =====
-Name:   NVIDIA H100 80GB HBM3
-Compute Capability:     9.0
-Clock Rate:     1980000
-Device Copy Overlap:    Enabled
-Kernel Execition Timeout:       Disabled
-===== Memory Information for Device 5 =====
-Total Global Mem:       84929216512
-Total Constant Mem:     65536
-Max Mem pitch:  2147483647
-Texture Alignment:      512
-===== MP Information for Device 5 =====
-Multiprocessor Count:   132
-Shared Mem per MP:      49152
-Registers per MP:       65536
-Threads in Warp:        32
-Max Threads per Block:  1024
-Max Trhead Dimensions:  (1024, 1024, 64)
-Max Grid Dimensions:    (2147483647, 65535, 65535)
-===== General Information for Device 6 =====
-Name:   NVIDIA H100 80GB HBM3
-Compute Capability:     9.0
-Clock Rate:     1980000
-Device Copy Overlap:    Enabled
-Kernel Execition Timeout:       Disabled
-===== Memory Information for Device 6 =====
-Total Global Mem:       84929216512
-Total Constant Mem:     65536
-Max Mem pitch:  2147483647
-Texture Alignment:      512
-===== MP Information for Device 6 =====
-Multiprocessor Count:   132
-Shared Mem per MP:      49152
-Registers per MP:       65536
-Threads in Warp:        32
-Max Threads per Block:  1024
-Max Trhead Dimensions:  (1024, 1024, 64)
-Max Grid Dimensions:    (2147483647, 65535, 65535)
-===== General Information for Device 7 =====
-Name:   NVIDIA H100 80GB HBM3
-Compute Capability:     9.0
-Clock Rate:     1980000
-Device Copy Overlap:    Enabled
-Kernel Execition Timeout:       Disabled
-===== Memory Information for Device 7 =====
-Total Global Mem:       84929216512
-Total Constant Mem:     65536
-Max Mem pitch:  2147483647
-Texture Alignment:      512
-===== MP Information for Device 7 =====
-Multiprocessor Count:   132
-Shared Mem per MP:      49152
-Registers per MP:       65536
-Threads in Warp:        32
-Max Threads per Block:  1024
-Max Trhead Dimensions:  (1024, 1024, 64)
-Max Grid Dimensions:    (2147483647, 65535, 65535)
-*/
+ * ===== General Information for Device 0 =====
+ * Name:   NVIDIA H100 80GB HBM3
+ * Compute Capability:     9.0
+ * Clock Rate:     1980000
+ * Device Copy Overlap:    Enabled
+ * Kernel Execition Timeout:       Disabled
+ * ===== Memory Information for Device 0 =====
+ * Total Global Mem:       84929216512
+ * Total Constant Mem:     65536
+ * Max Mem pitch:  2147483647
+ * Texture Alignment:      512
+ * ===== MP Information for Device 0 =====
+ * Multiprocessor Count:   132
+ * Shared Mem per MP:      49152
+ * Registers per MP:       65536
+ * Threads in Warp:        32
+ * Max Threads per Block:  1024
+ * Max Trhead Dimensions:  (1024, 1024, 64)
+ * Max Grid Dimensions:    (2147483647, 65535, 65535)
+ * ===== General Information for Device 1 =====
+ * Name:   NVIDIA H100 80GB HBM3
+ * Compute Capability:     9.0
+ * Clock Rate:     1980000
+ * Device Copy Overlap:    Enabled
+ * Kernel Execition Timeout:       Disabled
+ * ===== Memory Information for Device 1 =====
+ * Total Global Mem:       84929216512
+ * Total Constant Mem:     65536
+ * Max Mem pitch:  2147483647
+ * Texture Alignment:      512
+ * ===== MP Information for Device 1 =====
+ * Multiprocessor Count:   132
+ * Shared Mem per MP:      49152
+ * Registers per MP:       65536
+ * Threads in Warp:        32
+ * Max Threads per Block:  1024
+ * Max Trhead Dimensions:  (1024, 1024, 64)
+ * Max Grid Dimensions:    (2147483647, 65535, 65535)
+ * ===== General Information for Device 2 =====
+ * Name:   NVIDIA H100 80GB HBM3
+ * Compute Capability:     9.0
+ * Clock Rate:     1980000
+ * Device Copy Overlap:    Enabled
+ * Kernel Execition Timeout:       Disabled
+ * ===== Memory Information for Device 2 =====
+ * Total Global Mem:       84929216512
+ * Total Constant Mem:     65536
+ * Max Mem pitch:  2147483647
+ * Texture Alignment:      512
+ * ===== MP Information for Device 2 =====
+ * Multiprocessor Count:   132
+ * Shared Mem per MP:      49152
+ * Registers per MP:       65536
+ * Threads in Warp:        32
+ * Max Threads per Block:  1024
+ * Max Trhead Dimensions:  (1024, 1024, 64)
+ * Max Grid Dimensions:    (2147483647, 65535, 65535)
+ * ===== General Information for Device 3 =====
+ * Name:   NVIDIA H100 80GB HBM3
+ * Compute Capability:     9.0
+ * Clock Rate:     1980000
+ * Device Copy Overlap:    Enabled
+ * Kernel Execition Timeout:       Disabled
+ * ===== Memory Information for Device 3 =====
+ * Total Global Mem:       84929216512
+ * Total Constant Mem:     65536
+ * Max Mem pitch:  2147483647
+ * Texture Alignment:      512
+ * ===== MP Information for Device 3 =====
+ * Multiprocessor Count:   132
+ * Shared Mem per MP:      49152
+ * Registers per MP:       65536
+ * Threads in Warp:        32
+ * Max Threads per Block:  1024
+ * Max Trhead Dimensions:  (1024, 1024, 64)
+ * Max Grid Dimensions:    (2147483647, 65535, 65535)
+ * ===== General Information for Device 4 =====
+ * Name:   NVIDIA H100 80GB HBM3
+ * Compute Capability:     9.0
+ * Clock Rate:     1980000
+ * Device Copy Overlap:    Enabled
+ * Kernel Execition Timeout:       Disabled
+ * ===== Memory Information for Device 4 =====
+ * Total Global Mem:       84929216512
+ * Total Constant Mem:     65536
+ * Max Mem pitch:  2147483647
+ * Texture Alignment:      512
+ * ===== MP Information for Device 4 =====
+ * Multiprocessor Count:   132
+ * Shared Mem per MP:      49152
+ * Registers per MP:       65536
+ * Threads in Warp:        32
+ * Max Threads per Block:  1024
+ * Max Trhead Dimensions:  (1024, 1024, 64)
+ * Max Grid Dimensions:    (2147483647, 65535, 65535)
+ * ===== General Information for Device 5 =====
+ * Name:   NVIDIA H100 80GB HBM3
+ * Compute Capability:     9.0
+ * Clock Rate:     1980000
+ * Device Copy Overlap:    Enabled
+ * Kernel Execition Timeout:       Disabled
+ * ===== Memory Information for Device 5 =====
+ * Total Global Mem:       84929216512
+ * Total Constant Mem:     65536
+ * Max Mem pitch:  2147483647
+ * Texture Alignment:      512
+ * ===== MP Information for Device 5 =====
+ * Multiprocessor Count:   132
+ * Shared Mem per MP:      49152
+ * Registers per MP:       65536
+ * Threads in Warp:        32
+ * Max Threads per Block:  1024
+ * Max Trhead Dimensions:  (1024, 1024, 64)
+ * Max Grid Dimensions:    (2147483647, 65535, 65535)
+ * ===== General Information for Device 6 =====
+ * Name:   NVIDIA H100 80GB HBM3
+ * Compute Capability:     9.0
+ * Clock Rate:     1980000
+ * Device Copy Overlap:    Enabled
+ * Kernel Execition Timeout:       Disabled
+ * ===== Memory Information for Device 6 =====
+ * Total Global Mem:       84929216512
+ * Total Constant Mem:     65536
+ * Max Mem pitch:  2147483647
+ * Texture Alignment:      512
+ * ===== MP Information for Device 6 =====
+ * Multiprocessor Count:   132
+ * Shared Mem per MP:      49152
+ * Registers per MP:       65536
+ * Threads in Warp:        32
+ * Max Threads per Block:  1024
+ * Max Trhead Dimensions:  (1024, 1024, 64)
+ * Max Grid Dimensions:    (2147483647, 65535, 65535)
+ * ===== General Information for Device 7 =====
+ * Name:   NVIDIA H100 80GB HBM3
+ * Compute Capability:     9.0
+ * Clock Rate:     1980000
+ * Device Copy Overlap:    Enabled
+ * Kernel Execition Timeout:       Disabled
+ * ===== Memory Information for Device 7 =====
+ * Total Global Mem:       84929216512
+ * Total Constant Mem:     65536
+ * Max Mem pitch:  2147483647
+ * Texture Alignment:      512
+ * ===== MP Information for Device 7 =====
+ * Multiprocessor Count:   132
+ * Shared Mem per MP:      49152
+ * Registers per MP:       65536
+ * Threads in Warp:        32
+ * Max Threads per Block:  1024
+ * Max Trhead Dimensions:  (1024, 1024, 64)
+ * Max Grid Dimensions:    (2147483647, 65535, 65535)
+ */
 
 // struct __device_builtin__ cudaDeviceProp
 // {

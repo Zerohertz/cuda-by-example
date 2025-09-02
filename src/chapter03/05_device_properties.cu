@@ -25,6 +25,6 @@ int main(void)
 }
 
 /*
-ID of current CUDA device: 0
-ID of CUDA device closet to version 1.3: 0
-*/
+ * ID of current CUDA device: 0
+ * ID of CUDA device closet to version 1.3: 0
+ */
