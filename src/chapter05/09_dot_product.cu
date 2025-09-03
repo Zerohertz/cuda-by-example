@@ -50,7 +50,6 @@ int main(void)
     b         = make_unique<float[]>(N);
     partial_c = make_unique<float[]>(blocksPerGrid);
 
-
     cudaMalloc((void **)&dev_a, N * sizeof(float));
     cudaMalloc((void **)&dev_b, N * sizeof(float));
     cudaMalloc((void **)&dev_partial_c, blocksPerGrid * sizeof(float));
