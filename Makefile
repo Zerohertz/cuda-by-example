@@ -70,7 +70,7 @@ clang:
 	rm -rf build && \
 	cmake -S . -B build \
 	-DUSE_NVCC=OFF \
-	$(if $(DEBUG),-DENABLE_CUDA_DEBUG=ON)
+	$(if $(DEBUG),-DUSE_DEBUG=ON)
 
 # Generate CMake build directory with NVCC
 # Usage: make nvcc [DEBUG=1]
@@ -78,7 +78,7 @@ nvcc:
 	rm -rf build && \
 	cmake -S . -B build \
 	-DUSE_NVCC=ON \
-	$(if $(DEBUG),-DENABLE_CUDA_DEBUG=ON)
+	$(if $(DEBUG),-DUSE_DEBUG=ON)
 
 # Compile, run, and clean up CUDA file
 # Usage: make run src/chapter03/01_hello_world.cu

@@ -1,0 +1,191 @@
+$ make clang DEBUG=1
+rm -rf build && \
+cmake -S . -B build \
+-DUSE_NVCC=OFF \
+-DUSE_DEBUG=ON
+-- Using Clang++ compiler
+-- Clang++ debug mode enabled
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is Clang 18.1.3
+-- The CUDA compiler identification is Clang 18.1.3
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/bin/clang++ - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Found CUDAToolkit: /usr/local/cuda/include (found version "12.6.85") 
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so   
+-- Configuring done (8.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /workspace/build
+
+$ cd build
+
+$ make 11_dot_product
+[ 50%] Building CUDA object CMakeFiles/11_dot_product.dir/src/chapter05/11_dot_product.cu.o
+clang++: warning: CUDA version is newer than the latest supported version 12.3 [-Wunknown-cuda-version]
+clang++: warning: argument unused during compilation: '--cuda-noopt-device-debug' [-Wunused-command-line-argument]
+[100%] Linking CUDA executable 11_dot_product
+[100%] Built target 11_dot_product
+
+$ cuda-gdb ./11_dot_product
+NVIDIA (R) cuda-gdb 12.6
+Portions Copyright (C) 2007-2024 NVIDIA Corporation
+Based on GNU gdb 13.2
+Copyright (C) 2023 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This CUDA-GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://forums.developer.nvidia.com/c/developer-tools/cuda-developer-tools/cuda-gdb>.
+Find the CUDA-GDB manual and other documentation resources online at:
+    <https://docs.nvidia.com/cuda/cuda-gdb/index.html>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ./11_dot_product...
+(cuda-gdb) b main
+Breakpoint 1 at 0xbf86: file /workspace/src/chapter05/11_dot_product.cu, line 41.
+(cuda-gdb) r
+Starting program: /workspace/build/11_dot_product 
+warning: Error disabling address space randomization: Operation not permitted
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main () at /workspace/src/chapter05/11_dot_product.cu:41
+41          std::unique_ptr<float[]> a, b, partial_c;
+(cuda-gdb) list
+36              c[blockIdx.x] = cache[0];
+37      }
+38
+39      int main(void)
+40      {
+41          std::unique_ptr<float[]> a, b, partial_c;
+42          float                    c;
+43          float                   *dev_a, *dev_b, *dev_partial_c;
+44
+45          a         = std::make_unique<float[]>(N);
+(cuda-gdb) n
+45          a         = std::make_unique<float[]>(N);
+(cuda-gdb) n
+46          b         = std::make_unique<float[]>(N);
+(cuda-gdb) n
+47          partial_c = std::make_unique<float[]>(blocksPerGrid);
+(cuda-gdb) n
+49          CUDA_CHECK(cudaMalloc((void **)&dev_a, N * sizeof(float)));
+(cuda-gdb) n
+[New Thread 0x7fd636c5b000 (LWP 96195)]
+[New Thread 0x7fd635978000 (LWP 96196)]
+[Detaching after fork from child process 96197]
+[New Thread 0x7fd634869000 (LWP 96204)]
+[2025-09-04 01:05:59] [src/chapter05/11_dot_product.cu:49] ✅ cudaMalloc((void **)&dev_a, N * sizeof(float))
+50          CUDA_CHECK(cudaMalloc((void **)&dev_b, N * sizeof(float)));
+(cuda-gdb) q
+A debugging session is active.
+
+        Inferior 1 [process 96191] will be killed.
+
+Quit anyway? (y or n) y
+
+$ nsys profile --stats=true ./11_dot_product
+[WARNING: GPU initialization took too long. Please run the NVIDIA persistence daemon.
+For more information, visit the following page:
+https://docs.nvidia.com/deploy/driver-persistence/index.html#persistence-daemon
+
+Collecting data...
+[2025-09-04 01:06:24] [src/chapter05/11_dot_product.cu:49] ✅ cudaMalloc((void **)&dev_a, N * sizeof(float))
+[2025-09-04 01:06:24] [src/chapter05/11_dot_product.cu:50] ✅ cudaMalloc((void **)&dev_b, N * sizeof(float))
+[2025-09-04 01:06:24] [src/chapter05/11_dot_product.cu:51] ✅ cudaMalloc((void **)&dev_partial_c, blocksPerGrid * sizeof(float))
+[2025-09-04 01:06:24] [src/chapter05/11_dot_product.cu:58] ✅ cudaMemcpy(dev_a, a.get(), N * sizeof(float), cudaMemcpyHostToDevice)
+[2025-09-04 01:06:24] [src/chapter05/11_dot_product.cu:59] ✅ cudaMemcpy(dev_b, b.get(), N * sizeof(float), cudaMemcpyHostToDevice)
+[2025-09-04 01:06:24] [src/chapter05/11_dot_product.cu:62] ✅ cudaGetLastError()
+[2025-09-04 01:06:24] [src/chapter05/11_dot_product.cu:64] ✅ cudaMemcpy(partial_c.get(), dev_partial_c, blocksPerGrid * sizeof(float), cudaMemcpyDeviceToHost)
+[2025-09-04 01:06:24] [src/chapter05/11_dot_product.cu:70] ℹ️ Does GPU value 2.57236e+13 = 2.57236e+13?
+[2025-09-04 01:06:24] [src/chapter05/11_dot_product.cu:72] ✅ cudaFree(dev_a)
+[2025-09-04 01:06:24] [src/chapter05/11_dot_product.cu:73] ✅ cudaFree(dev_b)
+[2025-09-04 01:06:24] [src/chapter05/11_dot_product.cu:74] ✅ cudaFree(dev_partial_c)
+Generating '/tmp/nsys-report-4a0f.qdstrm'
+[1/8] [========================100%] report1.nsys-rep
+[2/8] [========================100%] report1.sqlite
+[3/8] Executing 'nvtx_sum' stats report
+SKIPPED: /workspace/build/report1.sqlite does not contain NV Tools Extension (NVTX) data.
+[4/8] Executing 'osrt_sum' stats report
+
+ Time (%)  Total Time (ns)  Num Calls    Avg (ns)      Med (ns)    Min (ns)   Max (ns)     StdDev (ns)            Name         
+ --------  ---------------  ---------  ------------  ------------  --------  -----------  -------------  ----------------------
+     51.7    2,031,850,798         23  88,341,339.0  56,283,164.0     2,900  908,783,680  184,305,495.7  poll                  
+     47.3    1,860,046,211      1,649   1,127,984.4      11,799.0     1,021  203,805,881    8,105,423.8  ioctl                 
+      0.5       18,212,551        146     124,743.5       1,931.0     1,009   17,708,948    1,465,324.2  fopen                 
+      0.4       16,113,969        121     133,173.3       5,055.0     2,084    7,301,313      737,857.9  open64                
+      0.0        1,816,796         46      39,495.6      14,048.5     2,041      779,557      113,812.6  mmap64                
+      0.0        1,059,195         10     105,919.5      49,142.0    32,211      323,719      102,508.6  sem_timedwait         
+      0.0          190,870          2      95,435.0      95,435.0    63,157      127,713       45,648.0  pthread_create        
+      0.0          148,854          1     148,854.0     148,854.0   148,854      148,854            0.0  pthread_cond_wait     
+      0.0          121,529         14       8,680.6       6,919.0     1,487       43,947       10,630.0  mmap                  
+      0.0           63,153          5      12,630.6       2,009.0     1,416       49,925       21,047.4  fgets                 
+      0.0           62,058         24       2,585.8       1,957.0     1,018        9,772        2,193.5  fclose                
+      0.0           50,431         15       3,362.1       3,578.0     1,184        6,411        1,911.7  read                  
+      0.0           35,778          7       5,111.1       5,517.0     2,144        8,253        2,095.4  open                  
+      0.0           33,554         12       2,796.2       2,381.0     1,240        5,819        1,299.5  write                 
+      0.0           27,097          6       4,516.2       4,452.0     1,381        9,010        2,908.7  munmap                
+      0.0           22,832          6       3,805.3       1,664.5     1,484       11,426        3,978.5  putc                  
+      0.0           20,629          3       6,876.3       5,740.0     5,569        9,320        2,118.0  pipe2                 
+      0.0           15,641          4       3,910.3       3,825.5     1,526        6,464        2,174.9  fwrite                
+      0.0           15,466          2       7,733.0       7,733.0     6,565        8,901        1,651.8  socket                
+      0.0           15,042          7       2,148.9       2,012.0     1,039        3,964          881.5  fcntl                 
+      0.0           11,640          1      11,640.0      11,640.0    11,640       11,640            0.0  fopen64               
+      0.0           11,193          2       5,596.5       5,596.5     4,192        7,001        1,986.3  pthread_cond_broadcast
+      0.0           10,051          1      10,051.0      10,051.0    10,051       10,051            0.0  connect               
+      0.0            3,416          1       3,416.0       3,416.0     3,416        3,416            0.0  bind                  
+      0.0            1,935          1       1,935.0       1,935.0     1,935        1,935            0.0  getentropy            
+      0.0            1,563          1       1,563.0       1,563.0     1,563        1,563            0.0  listen                
+
+[5/8] Executing 'cuda_api_sum' stats report
+
+ Time (%)  Total Time (ns)  Num Calls    Avg (ns)      Med (ns)    Min (ns)     Max (ns)      StdDev (ns)            Name         
+ --------  ---------------  ---------  -------------  -----------  ---------  -------------  -------------  ----------------------
+     98.5    1,151,136,058          3  383,712,019.3      4,323.0      3,358  1,151,128,377  664,602,061.0  cudaMalloc            
+      1.4       16,801,913          3    5,600,637.7      7,308.0      3,515     16,791,090    9,691,216.2  cudaFree              
+      0.1        1,064,634          1    1,064,634.0  1,064,634.0  1,064,634      1,064,634            0.0  cudaLaunchKernel      
+      0.0           66,984          3       22,328.0     18,161.0     12,871         35,952       12,091.6  cudaMemcpy            
+      0.0              732          1          732.0        732.0        732            732            0.0  cuModuleGetLoadingMode
+
+[6/8] Executing 'cuda_gpu_kern_sum' stats report
+
+ Time (%)  Total Time (ns)  Instances  Avg (ns)  Med (ns)  Min (ns)  Max (ns)  StdDev (ns)               Name             
+ --------  ---------------  ---------  --------  --------  --------  --------  -----------  ------------------------------
+    100.0           16,544          1  16,544.0  16,544.0    16,544    16,544          0.0  dot(float *, float *, float *)
+
+[7/8] Executing 'cuda_gpu_mem_time_sum' stats report
+
+ Time (%)  Total Time (ns)  Count  Avg (ns)  Med (ns)  Min (ns)  Max (ns)  StdDev (ns)           Operation          
+ --------  ---------------  -----  --------  --------  --------  --------  -----------  ----------------------------
+     79.5            9,919      2   4,959.5   4,959.5     4,863     5,056        136.5  [CUDA memcpy Host-to-Device]
+     20.5            2,560      1   2,560.0   2,560.0     2,560     2,560          0.0  [CUDA memcpy Device-to-Host]
+
+[8/8] Executing 'cuda_gpu_mem_size_sum' stats report
+
+ Total (MB)  Count  Avg (MB)  Med (MB)  Min (MB)  Max (MB)  StdDev (MB)           Operation          
+ ----------  -----  --------  --------  --------  --------  -----------  ----------------------------
+      0.270      2     0.135     0.135     0.135     0.135        0.000  [CUDA memcpy Host-to-Device]
+      0.000      1     0.000     0.000     0.000     0.000        0.000  [CUDA memcpy Device-to-Host]
+
+Generated:
+    /workspace/build/report1.nsys-rep
+    /workspace/build/report1.sqlite
