@@ -1,5 +1,5 @@
-#include "../common/cpu_bitmap.h"
-#include "../common/handler.cuh"
+#include "../include/cpu_bitmap.h"
+#include "../include/handler.cuh"
 
 #define DIM 1000
 

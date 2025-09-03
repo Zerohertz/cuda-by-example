@@ -1,4 +1,4 @@
-#include "../common/cpu_bitmap.h"
+#include "../include/cpu_bitmap.h"
 
 #define DIM 1000
 

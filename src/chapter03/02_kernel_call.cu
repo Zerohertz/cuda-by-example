@@ -1,4 +1,4 @@
-#include "../common/handler.cuh"
+#include "../include/handler.cuh"
 
 __global__ void kernel(void) {}
 

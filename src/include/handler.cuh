@@ -1,5 +1,4 @@
-#ifndef HANDLER_CUH
-#define HANDLER_CUH
+#pragma once
 
 #include <cstdlib>
 #include <string>
@@ -29,5 +28,3 @@ public:
 
 // CUDA macro
 #define CUDA_CHECK(error) Handler::checkError(error, __FILE__, __LINE__, #error)
-
-#endif // HANDLER_CUH

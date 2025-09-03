@@ -1,6 +1,6 @@
 #include <memory>
 
-#include "../common/handler.cuh"
+#include "../include/handler.cuh"
 
 #define BLOCK_DIM 128
 #define N         (64 * 1024)

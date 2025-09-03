@@ -14,12 +14,16 @@
  */
 
 
-#ifndef __CPU_BITMAP_H__
-#define __CPU_BITMAP_H__
+#pragma once
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 
-#include "gl_helper.h"
+#ifdef _WIN32
+#include <windows.h>
+#endif
+#include <GL/gl.h>
+#include <GL/glut.h>
+
 #include "stb_image_write.h"
 
 
@@ -30,13 +34,13 @@ struct CPUBitmap
     void          *dataBlock;
     void (*bitmapExit)(void *);
 
-    CPUBitmap(int width, int height, void *d = NULL)
+    CPUBitmap(int width, int height, void *d = nullptr)
     {
         pixels     = new unsigned char[width * height * 4];
         x          = width;
         y          = height;
         dataBlock  = d;
-        bitmapExit = NULL; // Initialize bitmapExit to prevent uninitialized access
+        bitmapExit = nullptr;
     }
 
     ~CPUBitmap() { delete[] pixels; }
@@ -44,7 +48,7 @@ struct CPUBitmap
     unsigned char *get_ptr(void) const { return pixels; }
     long           image_size(void) const { return x * y * 4; }
 
-    void display_and_exit(void (*e)(void *) = NULL)
+    void display_and_exit(void (*e)(void *) = nullptr)
     {
         CPUBitmap **bitmap = get_bitmap_ptr();
         *bitmap            = this;
@@ -77,7 +81,7 @@ struct CPUBitmap
         switch (key) {
         case 27:
             CPUBitmap *bitmap = *(get_bitmap_ptr());
-            if (bitmap != NULL && bitmap->dataBlock != NULL && bitmap->bitmapExit != NULL)
+            if (bitmap != nullptr && bitmap->dataBlock != nullptr && bitmap->bitmapExit != nullptr)
                 bitmap->bitmapExit(bitmap->dataBlock);
             exit(0);
         }
@@ -87,7 +91,7 @@ struct CPUBitmap
     static void Draw(void)
     {
         CPUBitmap *bitmap = *(get_bitmap_ptr());
-        if (bitmap != NULL) {
+        if (bitmap != nullptr) {
             glClearColor(0.0, 0.0, 0.0, 1.0);
             glClear(GL_COLOR_BUFFER_BIT);
             glDrawPixels(bitmap->x, bitmap->y, GL_RGBA, GL_UNSIGNED_BYTE, bitmap->pixels);
@@ -95,5 +99,3 @@ struct CPUBitmap
         }
     }
 };
-
-#endif // __CPU_BITMAP_H__

@@ -1,6 +1,6 @@
 #include <memory>
 
-#include "../common/handler.cuh"
+#include "../include/handler.cuh"
 
 #define imin(a, b)     (a < b ? a : b)
 #define sum_squares(x) (x * (x + 1) * (2 * x + 1) / 6)

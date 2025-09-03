@@ -1,4 +1,4 @@
-#include "../common/handler.cuh"
+#include "../include/handler.cuh"
 
 constexpr int a = 2;
 constexpr int b = 7;
