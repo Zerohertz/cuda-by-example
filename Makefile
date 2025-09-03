@@ -1,10 +1,10 @@
 SHELL := /bin/zsh
 CONTAINER_NAME := gpu
-NVCC := /usr/local/cuda/bin/nvcc
+NVCC := nvcc
 NVCC_FLAGS := -x cu -std c++17 --gpu-architecture compute_90 --gpu-code sm_90
 
 .DEFAULT_GOAL := help
-.PHONY: docker exec stop rm init lint format build run compile clean bear help
+.PHONY: docker exec stop rm init lint format clang nvcc run compile clean bear help
 
 # Prevent make from trying to build the file arguments as targets
 $(FILE_ARG):
@@ -33,8 +33,14 @@ rm:
 
 # Initialize development environment
 init:
+	echo 'export PATH=$${PATH}:/usr/local/cuda/bin' > ~/.env
+	curl -fsSL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/cuda-archive-keyring.gpg \
+		-o /usr/share/keyrings/cuda-archive-keyring.gpg
+	sed -i '/signed-by/!s@^deb @deb [signed-by=/usr/share/keyrings/cuda-archive-keyring.gpg] @' \
+		/etc/apt/sources.list.d/cuda.list
 	apt-get update && \
 	apt-get install -y \
+	gdb cuda-toolkit-12-6 \
 	clang-tidy clang-format \
 	libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev
 	uv pip install pre-commit
@@ -58,14 +64,21 @@ format:
 	-o -name "*.cuh" \
 	| xargs clang-format -i
 
-# Generate CMake build directory
-# Usage: make build
-build:
+# Generate CMake build directory with Clang++
+# Usage: make clang [DEBUG=1]
+clang:
 	rm -rf build && \
 	cmake -S . -B build \
-	-DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
-	-DCMAKE_CXX_COMPILER=clang++ \
-	-DCMAKE_CUDA_COMPILER=clang++
+	-DUSE_NVCC=OFF \
+	$(if $(DEBUG),-DENABLE_CUDA_DEBUG=ON)
+
+# Generate CMake build directory with NVCC
+# Usage: make nvcc [DEBUG=1]
+nvcc:
+	rm -rf build && \
+	cmake -S . -B build \
+	-DUSE_NVCC=ON \
+	$(if $(DEBUG),-DENABLE_CUDA_DEBUG=ON)
 
 # Compile, run, and clean up CUDA file
 # Usage: make run src/chapter03/01_hello_world.cu
@@ -111,9 +124,14 @@ help:
 	@echo ""
 	@echo "  Development environment:"
 	@echo "    init     - Initialize development environment with clang tools and pre-commit"
-	@echo "    build    - Generate CMake build directory"
+	@echo "    clang    - Generate CMake build directory (Clang++)"
+	@echo "    nvcc     - Generate CMake build directory (NVCC)"
 	@echo "    lint     - Run clang-tidy to fix code issues"
 	@echo "    format   - Format code with clang-format"
+	@echo ""
+	@echo "  Debug mode: Add DEBUG=1 to any build command"
+	@echo "    make clang DEBUG=1    - Clang++ with debug"
+	@echo "    make nvcc DEBUG=1     - NVCC with debug"
 	@echo ""
 	@echo "  CUDA compilation:"
 	@echo "    run      - Compile, run, and clean up CUDA file"

@@ -76,14 +76,7 @@ docker exec -it gpu zsh
 
 ```bash
 $ make init
-apt-get update && \
-apt-get install -y \
-clang-tidy clang-format
-Get:1 https://apt.releases.hashicorp.com noble InRelease [12.9 kB]
-Get:2 https://apt.releases.hashicorp.com noble/main amd64 Packages [247 kB]
-Get:3 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64  InRelease [1,581 B]
-Get:4 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-Hit:5 http://archive.ubuntu.com/ubuntu noble InRelease
+...
 ```
 
 ```bash
@@ -94,13 +87,19 @@ gpu
 
 <h3 align="center">⚙️ Build & Run ⚙️</h3>
 
-```bash
-$ make build
+<table align="center">
+  <tr>
+    <th>Clang++</th>
+    <th>NVCC</th>
+  </tr>
+  <tr>
+    <td>
+      <pre lang="bash"><code>$ make clang
 rm -rf build && \
 cmake -S . -B build \
--DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
--DCMAKE_CXX_COMPILER=clang++ \
--DCMAKE_CUDA_COMPILER=clang++
+-DUSE_NVCC=OFF \
+
+-- Using Clang++ compiler
 -- The C compiler identification is GNU 13.3.0
 -- The CXX compiler identification is Clang 18.1.3
 -- The CUDA compiler identification is Clang 18.1.3
@@ -123,25 +122,205 @@ cmake -S . -B build \
 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
 -- Found Threads: TRUE
--- Configuring done (2.1s)
+-- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so
+-- Configuring done (8.2s)
 -- Generating done (0.0s)
 -- Build files have been written to: /workspace/build
-```
+</code></pre>
 
-```bash
-$ cd build
+</td>
+<td>
+<pre lang="bash"><code>$ make nvcc
+rm -rf build && \
+cmake -S . -B build \
+-DUSE_NVCC=ON \
+
+-- Using NVCC compiler
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is Clang 18.1.3
+-- The CUDA compiler identification is NVIDIA 12.6.85
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Found CUDAToolkit: /usr/local/cuda/targets/x86_64-linux/include (found version "12.6.85")
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so
+-- Configuring done (8.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /workspace/build
+</code></pre>
+
+</td>
+
+  </tr>
+  <tr>
+    <td>
+      <pre lang="bash"><code>$ cd build
 $ make 01_hello_world && ./01_hello_world
 [ 50%] Building CUDA object CMakeFiles/01_hello_world.dir/src/chapter03/01_hello_world.cu.o
 clang++: warning: CUDA version is newer than the latest supported version 12.3 [-Wunknown-cuda-version]
-clang++: warning: -lineinfo: 'linker' input unused [-Wunused-command-line-argument]
-warning: unknown warning option '-Wno-deprecated-gpu-targets'; did you mean '-Wno-deprecated-pragma'? [-Wunknown-warning-option]
-1 warning generated when compiling for sm_90.
-warning: unknown warning option '-Wno-deprecated-gpu-targets'; did you mean '-Wno-deprecated-pragma'? [-Wunknown-warning-option]
-1 warning generated when compiling for host.
 [100%] Linking CUDA executable 01_hello_world
 [100%] Built target 01_hello_world
-Hello, World!
-```
+[2025-09-03 23:28:58] [src/chapter03/01_hello_world.cu:5] ℹ️ Hello, World!
+[2025-09-03 23:28:58] [src/chapter03/01_hello_world.cu:6] ⚠️ Hello, World!
+[2025-09-03 23:28:58] [src/chapter03/01_hello_world.cu:7] ❌ Hello, World!
+</code></pre>
+    </td>
+    <td>
+      <pre lang="bash"><code>$ cd build
+$ make 01_hello_world && ./01_hello_world
+[ 50%] Building CUDA object CMakeFiles/01_hello_world.dir/src/chapter03/01_hello_world.cu.o
+[100%] Linking CUDA executable 01_hello_world
+[100%] Built target 01_hello_world
+[2025-09-03 23:20:13] [src/chapter03/01_hello_world.cu:5] ℹ️ Hello, World!
+[2025-09-03 23:20:13] [src/chapter03/01_hello_world.cu:6] ⚠️ Hello, World!
+[2025-09-03 23:20:13] [src/chapter03/01_hello_world.cu:7] ❌ Hello, World!
+</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <pre lang="bash"><code>$ make clang DEBUG=1
+rm -rf build && \
+cmake -S . -B build \
+-DUSE_NVCC=OFF \
+-DENABLE_CUDA_DEBUG=ON
+...
+$ cd build
+$ make 11_dot_product && cuda-gdb ./11_dot_product
+[ 50%] Building CUDA object CMakeFiles/11_dot_product.dir/src/chapter05/11_dot_product.cu.o
+clang++: warning: CUDA version is newer than the latest supported version 12.3 [-Wunknown-cuda-version]
+[100%] Linking CUDA executable 11_dot_product
+[100%] Built target 11_dot_product
+NVIDIA (R) cuda-gdb 12.6
+...
+Reading symbols from ./11_dot_product...
+(cuda-gdb) b main
+Breakpoint 1 at 0xbf86: file /workspace/src/chapter05/11_dot_product.cu, line 41.
+(cuda-gdb) r
+Starting program: /workspace/build/11_dot_product
+warning: Error disabling address space randomization: Operation not permitted
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main () at /workspace/src/chapter05/11*dot_product.cu:41
+41 std::unique_ptr<float[]> a, b, partial_c;
+(cuda-gdb) list
+36 c[blockIdx.x] = cache[0];
+37 }
+38
+39 int main(void)
+40 {
+41 std::unique_ptr<float[]> a, b, partial_c;
+42 float c;
+43 float*dev_a,*dev_b, \_dev_partial_c;
+44
+...
+49 CUDA_CHECK(cudaMalloc((void \*\*)&dev_a, N* sizeof(float)));
+(cuda-gdb) n
+[New Thread 0x7fbfb4ee3000 (LWP 85577)]
+[New Thread 0x7fbfaf522000 (LWP 85578)]
+[Detaching after fork from child process 85579]
+[New Thread 0x7fbfaca85000 (LWP 85586)]
+[2025-09-03 23:32:58] [src/chapter05/11_dot_product.cu:49] ✅ cudaMalloc((void **)&dev_a, N \* sizeof(float))
+50 CUDA_CHECK(cudaMalloc((void**)&dev_b, N \* sizeof(float)));
+$ nsys profile --stats=true ./11_dot_product
+Collecting data...
+...
+Time (%) Total Time (ns) Num Calls Avg (ns) Med (ns) Min (ns) Max (ns) StdDev (ns) Name
+
+---
+
+     56.3    1,892,847,558      1,658   1,141,645.1      18,479.5     1,055  220,450,458    7,900,221.3  ioctl
+     41.2    1,383,336,538         16  86,458,533.6  10,093,906.5     3,558  964,746,540  236,532,591.2  poll
+      1.3       43,752,207        121     361,588.5       6,372.0     2,732    8,126,082    1,496,006.8  open64
+
+...
+Generated:
+/workspace/build/report1.nsys-rep
+/workspace/build/report1.sqlite
+</code></pre>
+
+</td>
+<td>
+<pre lang="bash"><code>$ make nvcc DEBUG=1
+rm -rf build && \
+cmake -S . -B build \
+-DUSE_NVCC=ON \
+-DENABLE_CUDA_DEBUG=ON
+...
+$ cd build
+$ make 11_dot_product && cuda-gdb ./11_dot_product
+[ 50%] Building CUDA object CMakeFiles/11_dot_product.dir/src/chapter05/11_dot_product.cu.o
+[100%] Linking CUDA executable 11_dot_product
+[100%] Built target 11_dot_product
+NVIDIA (R) cuda-gdb 12.6
+...
+Reading symbols from ./11_dot_product...
+(cuda-gdb) b main
+Breakpoint 1 at 0xbf43: file /workspace/src/chapter05/11_dot_product.cu, line 40.
+(cuda-gdb) r
+Starting program: /workspace/build/11_dot_product
+warning: Error disabling address space randomization: Operation not permitted
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main () at /workspace/src/chapter05/11*dot_product.cu:40
+40 {
+(cuda-gdb) list
+35 if (cacheIndex == 0)
+36 c[blockIdx.x] = cache[0];
+37 }
+38
+39 int main(void)
+40 {
+41 std::unique_ptr<float[]> a, b, partial_c;
+42 float c;
+43 float*dev_a,*dev_b, \_dev_partial_c;
+44
+...
+49 CUDA_CHECK(cudaMalloc((void \*\*)&dev_a, N* sizeof(float)));
+(cuda-gdb) n
+[New Thread 0x7f6214443000 (LWP 84317)]
+[New Thread 0x7f6213160000 (LWP 84318)]
+[Detaching after fork from child process 84319]
+[New Thread 0x7f6208f9c000 (LWP 84326)]
+[2025-09-03 23:24:15] [src/chapter05/11_dot_product.cu:49] ✅ cudaMalloc((void \**)&dev_a, N* sizeof(float))
+$ nsys profile --stats=true ./11_dot_product
+Collecting data...
+...
+Time (%) Total Time (ns) Num Calls Avg (ns) Med (ns) Min (ns) Max (ns) StdDev (ns) Name
+
+---
+
+     50.1    1,761,121,669         22  80,050,985.0  35,298,208.0     3,314  758,247,341  157,132,669.5  poll
+     48.5    1,705,147,300      1,652   1,032,171.5      12,548.0     1,019  210,198,255    7,771,683.0  ioctl
+      0.7       23,606,803        121     195,097.5       4,625.0     1,629   10,492,489    1,167,185.7  open64
+
+...
+Generated:
+/workspace/build/report1.nsys-rep
+/workspace/build/report1.sqlite
+</code></pre>
+
+</td>
+
+  </tr>
+</table>
 
 ---
 
