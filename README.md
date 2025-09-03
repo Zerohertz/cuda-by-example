@@ -5,17 +5,19 @@
   <tr>
     <td align="center" style="padding: 5px"><strong>Build System</strong></td>
     <td align="center" style="padding: 5px">
-      <img
-        src="https://img.shields.io/badge/CMake-064F8C?style=flat&logo=cmake&logoColor=white"
-      />
+      <a href="https://cmake.org/">
+        <img
+          src="https://img.shields.io/badge/CMake-064F8C?style=flat&logo=cmake&logoColor=white"
+      /></a>
     </td>
   </tr>
   <tr>
     <td align="center" style="padding: 5px"><strong>Languages</strong></td>
     <td align="center" style="padding: 5px">
-      <img
-        src="https://img.shields.io/badge/C++-00599C?style=flat&logo=cplusplus&logoColor=white"
-      />
+      <a href="https://isocpp.org/">
+        <img
+          src="https://img.shields.io/badge/C++-00599C?style=flat&logo=cplusplus&logoColor=white"
+      /></a>
       <a href="https://developer.nvidia.com/cuda-toolkit" target="_blank">
         <img
           src="https://img.shields.io/badge/CUDA-76B900?style=flat&logo=nvidia&logoColor=white"
