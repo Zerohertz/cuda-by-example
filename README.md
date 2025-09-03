@@ -1,6 +1,60 @@
 <h2 align="center">⚒️ CUDA by Example ⚒️</h2>
 <h4 align="center">An Introduction to General-Purpose GPU Programming</h4>
 
+<table align="center">
+  <tr>
+    <td align="center" style="padding: 5px"><strong>Build System</strong></td>
+    <td align="center" style="padding: 5px">
+      <img
+        src="https://img.shields.io/badge/CMake-064F8C?style=flat&logo=cmake&logoColor=white"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td align="center" style="padding: 5px"><strong>Languages</strong></td>
+    <td align="center" style="padding: 5px">
+      <img
+        src="https://img.shields.io/badge/C++-00599C?style=flat&logo=cplusplus&logoColor=white"
+      />
+      <a href="https://developer.nvidia.com/cuda-toolkit" target="_blank">
+        <img
+          src="https://img.shields.io/badge/CUDA-76B900?style=flat&logo=nvidia&logoColor=white"
+        />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" style="padding: 5px"><strong>Compilers</strong></td>
+    <td align="center" style="padding: 5px">
+      <a href="https://clang.llvm.org/" target="_blank">
+        <img
+          src="https://img.shields.io/badge/Clang-262D3A?style=flat&logo=llvm&logoColor=white"
+        />
+      </a>
+      <a
+        href="https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/"
+        target="_blank"
+      >
+        <img
+          src="https://img.shields.io/badge/NVCC-76B900?style=flat&logo=nvidia&logoColor=white"
+        />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" style="padding: 5px">
+      <strong>Infrastructure</strong>
+    </td>
+    <td align="center" style="padding: 5px">
+      <a href="https://llvm.org/" target="_blank">
+        <img
+          src="https://img.shields.io/badge/LLVM-262D3A?style=flat&logo=llvm&logoColor=white"
+        />
+      </a>
+    </td>
+  </tr>
+</table>
+
 <h3 align="center">👷 Setup 👷</h3>
 
 ```bash
