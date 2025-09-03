@@ -41,11 +41,13 @@ make bear src/path/to/file.cu # Generate compile_commands.json for IDE support
 - `src/chapter03/` - Basic CUDA concepts and device queries
 - `src/chapter04/` - Parallel programming fundamentals (vector operations, Julia sets)
 - `src/chapter05/` - Thread cooperation and dot products
-- `src/common/` - Shared utilities and helper functions
+- `src/include/` - Shared utilities and helper functions
 
 ### Key Components
-- **book.h** - Core utilities including CUDA error handling macros (`HANDLE_ERROR`, `HANDLE_NULL`), memory utilities, and common GPU kernels for color conversion
-- **Common headers** - Graphics helpers (OpenGL integration), bitmap utilities, and image writing support
+- **handler.cuh** - CUDA error handling utilities and macros (`HANDLE_ERROR`, `HANDLE_NULL`)
+- **cpu_bitmap.h** - CPU bitmap utilities and image processing functions
+- **logger.h** - Logging utilities for debugging and information output
+- **stb_image_write.h** - Image writing support (PNG, BMP, TGA, JPG formats)
 
 ### Build System Details
 - **CMake**: Automatically discovers and builds all `.cpp` and `.cu` files in `src/`
@@ -60,7 +62,7 @@ make bear src/path/to/file.cu # Generate compile_commands.json for IDE support
 - NVCC flags: `-x cu -std c++17 --gpu-architecture compute_90 --gpu-code sm_90`
 
 ## Notes
-- All CUDA files should include `src/common/book.h` for error handling
+- All CUDA files should include `src/include/handler.cuh` for error handling
 - Use `HANDLE_ERROR()` macro for CUDA API calls
 - The project follows a chapter-by-chapter learning structure from the CUDA by Example book
 - Graphics-related examples may require OpenGL dependencies (handled by Docker environment)
