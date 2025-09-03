@@ -30,7 +30,7 @@ if [[ $FORMAT_EXIT_CODE -ne 0 ]]; then
 fi
 
 if [[ "$FORMAT_SUCCESS" -eq 1 ]]; then
-	echo "✅ Format completed" >&2
+	echo "✅ Format completed"
 else
 	echo "❌ Format failed" >&2
 	exit 2
