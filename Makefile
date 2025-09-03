@@ -1,6 +1,6 @@
 SHELL := /bin/zsh
 CONTAINER_NAME := gpu
-NVCC := nvcc
+NVCC := /usr/local/cuda/bin/nvcc
 NVCC_FLAGS := -x cu -std c++17 --gpu-architecture compute_90 --gpu-code sm_90
 
 .DEFAULT_GOAL := help
@@ -42,7 +42,7 @@ init:
 
 # Code quality tools
 lint:
-	find src -name "*.cu" -o -name "*.cpp" -o -name "*.h" | xargs clang-tidy -p build -fix
+	find src -name "*.cu" -o -name "*.cpp" -o -name "*.h" | xargs clang-tidy -p build --fix
 
 format:
 	find src -name "*.cu" -o -name "*.cpp" -o -name "*.h" | xargs clang-format -i
