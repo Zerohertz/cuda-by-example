@@ -42,10 +42,21 @@ init:
 
 # Code quality tools
 lint:
-	find src -name "*.cu" -o -name "*.cpp" -o -name "*.h" | xargs clang-tidy -p build --fix
+	find src \
+	-name "*.cpp" \
+	-o -name "*.cu" \
+	| xargs clang-tidy \
+	-p build \
+	--header-filter='.*' \
+	--fix
 
 format:
-	find src -name "*.cu" -o -name "*.cpp" -o -name "*.h" | xargs clang-format -i
+	find src \
+	-name "*.cpp" \
+	-o -name "*.h" \
+	-o -name "*.cu" \
+	-o -name "*.cuh" \
+	| xargs clang-format -i
 
 # Generate CMake build directory
 # Usage: make build
@@ -73,7 +84,15 @@ compile:
 # Clean up all compiled binaries
 # Usage: make clean
 clean:
-	find ./src -type f -executable ! -name "*.cu" ! -name "*.cpp" ! -name "*.c" ! -name "*.h" ! -name "*.sh" ! -name "*.py" -delete
+	find ./src -type f -executable \
+	! -name "*.c" \
+	! -name "*.cpp" \
+	! -name "*.h" \
+	! -name "*.cu" \
+	! -name "*.cuh" \
+	! -name "*.sh" \
+	! -name "*.py" \
+	-delete
 
 # Generate compile_commands.json for IDE support with bear
 # Usage: make bear src/chapter03/01_hello_world.cu
