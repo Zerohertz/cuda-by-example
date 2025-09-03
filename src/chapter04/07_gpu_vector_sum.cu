@@ -1,6 +1,4 @@
-#include <iostream>
-
-using namespace std;
+#include "../common/handler.cuh"
 
 #define N 10
 
@@ -16,39 +14,54 @@ int main(void)
     int  a[N], b[N], c[N];
     int *dev_a, *dev_b, *dev_c;
 
-    cudaMalloc((void **)&dev_a, N * sizeof(int));
-    cudaMalloc((void **)&dev_b, N * sizeof(int));
-    cudaMalloc((void **)&dev_c, N * sizeof(int));
+    CUDA_CHECK(cudaMalloc((void **)&dev_a, N * sizeof(int)));
+    CUDA_CHECK(cudaMalloc((void **)&dev_b, N * sizeof(int)));
+    CUDA_CHECK(cudaMalloc((void **)&dev_c, N * sizeof(int)));
 
     for (int i = 0; i < N; i++) {
         a[i] = -i;
         b[i] = i * i;
     }
 
-    cudaMemcpy(dev_a, a, N * sizeof(int), cudaMemcpyHostToDevice);
-    cudaMemcpy(dev_b, b, N * sizeof(int), cudaMemcpyHostToDevice);
+    CUDA_CHECK(cudaMemcpy(dev_a, a, N * sizeof(int), cudaMemcpyHostToDevice));
+    CUDA_CHECK(cudaMemcpy(dev_b, b, N * sizeof(int), cudaMemcpyHostToDevice));
 
     add<<<N, 1>>>(dev_a, dev_b, dev_c);
+    CUDA_CHECK(cudaGetLastError());
 
-    cudaMemcpy(c, dev_c, N * sizeof(int), cudaMemcpyDeviceToHost);
+    CUDA_CHECK(cudaMemcpy(c, dev_c, N * sizeof(int), cudaMemcpyDeviceToHost));
     for (int i = 0; i < N; i++) {
-        cout << a[i] << " + " << b[i] << " = " << c[i] << endl;
+        LOG_INFO(a[i], " + ", b[i], " = ", c[i]);
     }
-    cudaFree(dev_a);
-    cudaFree(dev_b);
-    cudaFree(dev_c);
+    CUDA_CHECK(cudaFree(dev_a));
+    CUDA_CHECK(cudaFree(dev_b));
+    CUDA_CHECK(cudaFree(dev_c));
+
     return 0;
 }
 
 /*
- * 0 + 0 = 0
- * -1 + 1 = 0
- * -2 + 4 = 2
- * -3 + 9 = 6
- * -4 + 16 = 12
- * -5 + 25 = 20
- * -6 + 36 = 30
- * -7 + 49 = 42
- * -8 + 64 = 56
- * -9 + 81 = 72
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:17] ✅ cudaMalloc((void **)&dev_a, N * sizeof(int))
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:18] ✅ cudaMalloc((void **)&dev_b, N * sizeof(int))
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:19] ✅ cudaMalloc((void **)&dev_c, N * sizeof(int))
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:26] ✅ cudaMemcpy(dev_a, a, N * sizeof(int),
+ * cudaMemcpyHostToDevice)
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:27] ✅ cudaMemcpy(dev_b, b, N * sizeof(int),
+ * cudaMemcpyHostToDevice)
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:30] ✅ cudaGetLastError()
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:32] ✅ cudaMemcpy(c, dev_c, N * sizeof(int),
+ * cudaMemcpyDeviceToHost)
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:34] ℹ️ 0 + 0 = 0
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:34] ℹ️ -1 + 1 = 0
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:34] ℹ️ -2 + 4 = 2
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:34] ℹ️ -3 + 9 = 6
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:34] ℹ️ -4 + 16 = 12
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:34] ℹ️ -5 + 25 = 20
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:34] ℹ️ -6 + 36 = 30
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:34] ℹ️ -7 + 49 = 42
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:34] ℹ️ -8 + 64 = 56
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:34] ℹ️ -9 + 81 = 72
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:36] ✅ cudaFree(dev_a)
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:37] ✅ cudaFree(dev_b)
+ * [2025-09-03 21:09:30] [src/chapter04/07_gpu_vector_sum.cu:38] ✅ cudaFree(dev_c)
  */

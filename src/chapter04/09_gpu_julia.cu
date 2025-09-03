@@ -1,4 +1,5 @@
 #include "../common/cpu_bitmap.h"
+#include "../common/handler.cuh"
 
 #define DIM 1000
 
@@ -19,8 +20,8 @@ struct cuComplex
 __device__ int julia(int x, int y)
 {
     const float scale = 1.5;
-    float       jx    = scale * (float)(DIM / 2 - x) / (DIM / 2);
-    float       jy    = scale * (float)(DIM / 2 - y) / (DIM / 2);
+    float       jx    = scale * static_cast<float>(DIM / 2.0f - x) / (DIM / 2.0f);
+    float       jy    = scale * static_cast<float>(DIM / 2.0f - y) / (DIM / 2.0f);
 
     cuComplex c(-0.8, 0.156);
     cuComplex a(jx, jy);
@@ -59,14 +60,25 @@ int main(void)
     CPUBitmap      bitmap(DIM, DIM, &data);
     unsigned char *dev_bitmap;
 
-    cudaMalloc((void **)&dev_bitmap, bitmap.image_size());
+    CUDA_CHECK(cudaMalloc((void **)&dev_bitmap, bitmap.image_size()));
     data.dev_bitmap = dev_bitmap;
 
     dim3 grid(DIM, DIM);
     kernel<<<grid, 1>>>(dev_bitmap);
+    CUDA_CHECK(cudaGetLastError());
 
-    cudaMemcpy(bitmap.get_ptr(), dev_bitmap, bitmap.image_size(), cudaMemcpyDeviceToHost);
-    cudaFree(dev_bitmap);
+    CUDA_CHECK(cudaMemcpy(bitmap.get_ptr(), dev_bitmap, bitmap.image_size(), cudaMemcpyDeviceToHost));
+    CUDA_CHECK(cudaFree(dev_bitmap));
 
     bitmap.save_to_png("../res/chapter04_09_gpu_julia.png");
+
+    return 0;
 }
+
+/*
+ * [2025-09-03 21:12:03] [src/chapter04/09_gpu_julia.cu:63] ✅ cudaMalloc((void **)&dev_bitmap, bitmap.image_size())
+ * [2025-09-03 21:12:03] [src/chapter04/09_gpu_julia.cu:68] ✅ cudaGetLastError()
+ * [2025-09-03 21:12:03] [src/chapter04/09_gpu_julia.cu:70] ✅ cudaMemcpy(bitmap.get_ptr(), dev_bitmap,
+ * bitmap.image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-03 21:12:03] [src/chapter04/09_gpu_julia.cu:71] ✅ cudaFree(dev_bitmap)
+ */

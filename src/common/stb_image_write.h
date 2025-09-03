@@ -1352,6 +1352,11 @@ stbi_write_png_to_mem(const unsigned char *pixels, int stride_bytes, int x, int 
     filt = (unsigned char *)STBIW_MALLOC((x * n + 1) * y);
     if (!filt)
         return 0;
+    // Prevent allocation of 0 bytes
+    if (x * n == 0) {
+        STBIW_FREE(filt);
+        return 0;
+    }
     line_buffer = (signed char *)STBIW_MALLOC(x * n);
     if (!line_buffer) {
         STBIW_FREE(filt);

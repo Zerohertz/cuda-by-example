@@ -19,8 +19,8 @@ struct cuComplex
 int julia(int x, int y)
 {
     const float scale = 1.5;
-    float       jx    = scale * (float)(DIM / 2 - x) / (DIM / 2);
-    float       jy    = scale * (float)(DIM / 2 - y) / (DIM / 2);
+    float       jx    = scale * static_cast<float>(DIM / 2.0f - x) / (DIM / 2.0f);
+    float       jy    = scale * static_cast<float>(DIM / 2.0f - y) / (DIM / 2.0f);
 
     cuComplex c(-0.8, 0.156);
     cuComplex a(jx, jy);
@@ -58,4 +58,6 @@ int main(void)
     kernel(ptr);
 
     bitmap.save_to_png("../res/chapter04_08_cpu_julia.png");
+
+    return 0;
 }

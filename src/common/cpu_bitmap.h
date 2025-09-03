@@ -32,10 +32,11 @@ struct CPUBitmap
 
     CPUBitmap(int width, int height, void *d = NULL)
     {
-        pixels    = new unsigned char[width * height * 4];
-        x         = width;
-        y         = height;
-        dataBlock = d;
+        pixels     = new unsigned char[width * height * 4];
+        x          = width;
+        y          = height;
+        dataBlock  = d;
+        bitmapExit = NULL; // Initialize bitmapExit to prevent uninitialized access
     }
 
     ~CPUBitmap() { delete[] pixels; }
@@ -76,7 +77,7 @@ struct CPUBitmap
         switch (key) {
         case 27:
             CPUBitmap *bitmap = *(get_bitmap_ptr());
-            if (bitmap->dataBlock != NULL && bitmap->bitmapExit != NULL)
+            if (bitmap != NULL && bitmap->dataBlock != NULL && bitmap->bitmapExit != NULL)
                 bitmap->bitmapExit(bitmap->dataBlock);
             exit(0);
         }
@@ -86,10 +87,12 @@ struct CPUBitmap
     static void Draw(void)
     {
         CPUBitmap *bitmap = *(get_bitmap_ptr());
-        glClearColor(0.0, 0.0, 0.0, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT);
-        glDrawPixels(bitmap->x, bitmap->y, GL_RGBA, GL_UNSIGNED_BYTE, bitmap->pixels);
-        glFlush();
+        if (bitmap != NULL) {
+            glClearColor(0.0, 0.0, 0.0, 1.0);
+            glClear(GL_COLOR_BUFFER_BIT);
+            glDrawPixels(bitmap->x, bitmap->y, GL_RGBA, GL_UNSIGNED_BYTE, bitmap->pixels);
+            glFlush();
+        }
     }
 };
 
