@@ -60,6 +60,7 @@ format:
 	find src \
 	-name "*.cpp" \
 	-o -name "*.h" \
+	-o -name "*.hpp" \
 	-o -name "*.cu" \
 	-o -name "*.cuh" \
 	| xargs clang-format -i

@@ -45,8 +45,8 @@ make bear src/path/to/file.cu # Generate compile_commands.json for IDE support
 
 ### Key Components
 - **handler.cuh** - CUDA error handling utilities and macros (`HANDLE_ERROR`, `HANDLE_NULL`)
-- **cpu_bitmap.h** - CPU bitmap utilities and image processing functions
-- **logger.h** - Logging utilities for debugging and information output
+- **cpu_bitmap.hpp** - CPU bitmap utilities and image processing functions
+- **logger.hpp** - Logging utilities for debugging and information output
 - **stb_image_write.h** - Image writing support (PNG, BMP, TGA, JPG formats)
 
 ### Build System Details

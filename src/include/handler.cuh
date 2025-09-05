@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <string>
 
-#include "logger.h"
+#include "logger.hpp"
 
 class Handler
 {

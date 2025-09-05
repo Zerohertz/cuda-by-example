@@ -4,7 +4,7 @@ INPUT=$(cat)
 FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // .tool_input.filePath // empty')
 
 # Only process C++/CUDA files
-if [[ ! "$FILE_PATH" =~ \.(cpp|h|cu|cuh)$ ]] || [[ ! -f "$FILE_PATH" ]]; then
+if [[ ! "$FILE_PATH" =~ \.(cpp|h|hpp|cu|cuh)$ ]] || [[ ! -f "$FILE_PATH" ]]; then
 	exit 0
 fi
 
