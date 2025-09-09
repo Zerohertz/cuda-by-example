@@ -68,3 +68,116 @@ int main(void)
     cleanup(&data);
     return 0;
 }
+
+/*
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:50] ✅ cudaMalloc((void **)&data.dev_bitmap,
+ * bitmap.image_size())
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:54] ℹ️ Generating ripple animation frames...
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:59] ℹ️ Progress: 0/50 frames
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:59] ℹ️ Progress: 10/50 frames
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:59] ℹ️ Progress: 20/50 frames
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:59] ℹ️ Progress: 30/50 frames
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:59] ℹ️ Progress: 40/50 frames
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:10] [src/chapter05/11_gpu_ripple_threads.cu:40] ✅ cudaMemcpy(d->bitmap->get_ptr(), d->dev_bitmap,
+ * d->bitmap->image_size(), cudaMemcpyDeviceToHost)
+ * [2025-09-09 21:04:15] [src/chapter05/11_gpu_ripple_threads.cu:66] ℹ️ GIF saved successfully!
+ * [2025-09-09 21:04:15] [src/chapter05/11_gpu_ripple_threads.cu:42] ✅ cudaFree(d->dev_bitmap)
+ */
