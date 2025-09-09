@@ -42,7 +42,7 @@ init:
 	apt-get install -y \
 	gdb cuda-toolkit-12-6 \
 	clang-tidy clang-format \
-	libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev
+	freeglut3-dev
 	uv pip install pre-commit
 	pre-commit install
 
