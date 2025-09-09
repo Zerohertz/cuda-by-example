@@ -243,3 +243,11 @@ AI Engineering에서 GPU/CUDA 아키텍쳐는 반드시 알아야할 핵심 지�
 
 </p>
 </details>
+
+---
+
+<h3 align="center">📜 References 📜</h3>
+
+- [NVIDIA/cuda-samples](https://github.com/NVIDIA/cuda-samples)
+- [NVIDIA: cuda-example](https://developer.nvidia.com/cuda-example)
+- [CodedK/CUDA-by-Example-source-code-for-the-book-s-examples-](https://github.com/CodedK/CUDA-by-Example-source-code-for-the-book-s-examples-)
