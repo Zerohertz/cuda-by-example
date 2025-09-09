@@ -41,7 +41,6 @@ struct CPUAnimBitmap
     void (*clickDrag)(void *, int, int, int, int);
     int dragStartX, dragStartY;
 
-    // GIF recording
     std::vector<std::vector<unsigned char>> frames;
     bool                                    recording;
     int                                     frameDelay;
@@ -55,7 +54,7 @@ struct CPUAnimBitmap
         dataBlock  = d;
         clickDrag  = nullptr;
         recording  = false;
-        frameDelay = 10; // 100ms default
+        frameDelay = 100;
         sourceFile = srcFile ? std::string(srcFile) : std::string();
     }
 
@@ -66,7 +65,7 @@ struct CPUAnimBitmap
 
     void click_drag(void (*f)(void *, int, int, int, int)) { clickDrag = f; }
 
-    void start_recording(int delay = 10)
+    void start_recording(int delay = 100)
     {
         recording  = true;
         frameDelay = delay;
@@ -100,18 +99,13 @@ struct CPUAnimBitmap
         char gif_filename[256];
         snprintf(gif_filename, sizeof(gif_filename), "%s.gif", output_path.c_str());
 
-        // Create GIF writer - gif.h expects delay in centiseconds (1/100 second)
         GifWriter g;
-        if (!GifBegin(&g, gif_filename, width, height, frameDelay)) {
+        if (!GifBegin(&g, gif_filename, width, height, frameDelay / 10)) {
             return false;
         }
-
-        // gif.h expects RGBA8 format (alpha is ignored)
         for (size_t frame_idx = 0; frame_idx < frames.size(); ++frame_idx) {
             const auto &frame = frames[frame_idx];
-
-            // Use RGBA data directly - gif.h expects RGBA8
-            if (!GifWriteFrame(&g, frame.data(), width, height, frameDelay)) {
+            if (!GifWriteFrame(&g, frame.data(), width, height, frameDelay / 10)) {
                 GifEnd(&g);
                 return false;
             }

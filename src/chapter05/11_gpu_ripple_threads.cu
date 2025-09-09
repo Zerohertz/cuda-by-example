@@ -1,9 +1,11 @@
 #include "../include/cpu_anim.hpp"
 #include "../include/handler.cuh"
-#include "../include/utils.hpp"
 
-#define DIM 1024
-#define PI  3.1415926535897932f
+#define DIM           1024
+#define PI            3.1415926535897932f
+#define FRAME_PER_SEC 20
+#define MS_PER_FRAME  1000 / FRAME_PER_SEC
+#define NUM_FRAME     50
 
 
 __global__ void kernel(unsigned char *ptr, int ticks)
@@ -47,21 +49,18 @@ int main(void)
 
     CUDA_CHECK(cudaMalloc((void **)&data.dev_bitmap, bitmap.image_size()));
 
-    bitmap.start_recording(5); // 50ms per frame
+    bitmap.start_recording(MS_PER_FRAME);
 
     LOG_INFO("Generating ripple animation frames...");
-    for (int ticks = 0; ticks < 50; ticks++) {
+    for (int ticks = 0; ticks < NUM_FRAME; ticks++) {
         generate_frame(&data, ticks);
         bitmap.capture_frame();
         if (ticks % 10 == 0) {
-            LOG_INFO("Progress: ", ticks, "/50 frames");
+            LOG_INFO("Progress: ", ticks, "/", NUM_FRAME, " frames");
         }
     }
-    bitmap.stop_recording();
 
-    for (int i = 0; i < 3; i++) {
-        generate_frame(&data, i * 10);
-    }
+    bitmap.stop_recording();
 
     bitmap.save_to_gif();
     LOG_INFO("GIF saved successfully!");
