@@ -52,12 +52,12 @@ void kernel(unsigned char *ptr)
 
 int main(void)
 {
-    CPUBitmap      bitmap(DIM, DIM);
+    CPUBitmap      bitmap(DIM, DIM, nullptr, __FILE__);
     unsigned char *ptr = bitmap.get_ptr();
 
     kernel(ptr);
 
-    bitmap.save_to_png("../res/chapter04_08_cpu_julia.png");
+    bitmap.save_to_png();
 
     return 0;
 }

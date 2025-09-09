@@ -25,6 +25,7 @@
 #include <GL/glut.h>
 
 #include "stb_image_write.h"
+#include "utils.hpp"
 
 
 struct CPUBitmap
@@ -33,14 +34,16 @@ struct CPUBitmap
     int            x, y;
     void          *dataBlock;
     void (*bitmapExit)(void *);
+    std::string sourceFile;
 
-    CPUBitmap(int width, int height, void *d = nullptr)
+    CPUBitmap(int width, int height, void *d = nullptr, const char *srcFile = nullptr)
     {
         pixels     = new unsigned char[width * height * 4];
         x          = width;
         y          = height;
         dataBlock  = d;
         bitmapExit = nullptr;
+        sourceFile = srcFile ? std::string(srcFile) : std::string();
     }
 
     ~CPUBitmap() { delete[] pixels; }
@@ -66,7 +69,21 @@ struct CPUBitmap
         glutMainLoop();
     }
 
-    bool save_to_png(const char *filename) const { return stbi_write_png(filename, x, y, 4, pixels, x * 4) != 0; }
+    bool save_to_png(const char *filename = nullptr) const
+    {
+        std::string output_path;
+        if (filename) {
+            output_path = filename;
+        }
+        else {
+            output_path = generate_output_path(sourceFile.c_str());
+        }
+
+        char png_filename[256];
+        snprintf(png_filename, sizeof(png_filename), "%s.png", output_path.c_str());
+
+        return stbi_write_png(png_filename, x, y, 4, pixels, x * 4) != 0;
+    }
 
     // static method used for glut callbacks
     static CPUBitmap **get_bitmap_ptr(void)

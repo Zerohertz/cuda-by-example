@@ -57,7 +57,7 @@ struct DataBlock
 int main(void)
 {
     DataBlock      data;
-    CPUBitmap      bitmap(DIM, DIM, &data);
+    CPUBitmap      bitmap(DIM, DIM, &data, __FILE__);
     unsigned char *dev_bitmap;
 
     CUDA_CHECK(cudaMalloc((void **)&dev_bitmap, bitmap.image_size()));
@@ -70,7 +70,7 @@ int main(void)
     CUDA_CHECK(cudaMemcpy(bitmap.get_ptr(), dev_bitmap, bitmap.image_size(), cudaMemcpyDeviceToHost));
     CUDA_CHECK(cudaFree(dev_bitmap));
 
-    bitmap.save_to_png("../res/chapter04_09_gpu_julia.png");
+    bitmap.save_to_png();
 
     return 0;
 }
