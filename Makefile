@@ -18,9 +18,11 @@ FILE_PATH = $(firstword $(FILE_ARG))
 docker:
 	docker run \
 	-d --name $(CONTAINER_NAME) \
+	-p 6000:6666 \
 	-v ./:/workspace \
 	-w /workspace \
-	zerohertzkr/gpu
+	zerohertzkr/gpu \
+	"while true; do echo \"Starting Neovim server on port 6666...\"; nvim --headless --listen 0.0.0.0:6666; echo 'Neovim server exited. Restarting...'; sleep 1; done"
 
 exec:
 	docker exec -it $(CONTAINER_NAME) zsh
