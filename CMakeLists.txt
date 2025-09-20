@@ -31,7 +31,7 @@ endif()
 project(cuda-by-example LANGUAGES C CXX CUDA)
 
 find_package(CUDAToolkit REQUIRED)
-find_package(OpenGL REQUIRED)
+# find_package(OpenGL REQUIRED)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
