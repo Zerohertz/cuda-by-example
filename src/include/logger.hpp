@@ -61,11 +61,20 @@ private:
         else if constexpr (std::is_same_v<std::decay_t<T>, const char *> || std::is_same_v<std::decay_t<T>, char *>) {
             ss << std::string(value);
         }
+        else if constexpr (std::is_array_v<std::remove_reference_t<T>>) {
+            ss << "[";
+            for (size_t i = 0; i < std::extent_v<std::remove_reference_t<T>>; ++i) {
+                if (i > 0)
+                    ss << ", ";
+                ss << value[i];
+            }
+            ss << "]";
+        }
         else if constexpr (std::is_arithmetic_v<std::decay_t<T>>) {
             ss << value;
         }
         else {
-            ss << std::to_string(value);
+            ss << "[unsupported type]";
         }
     }
 
