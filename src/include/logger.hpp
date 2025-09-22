@@ -70,6 +70,9 @@ private:
             }
             ss << "]";
         }
+        else if constexpr (std::is_floating_point_v<std::decay_t<T>>) {
+            ss << std::fixed << std::setprecision(6) << value;
+        }
         else if constexpr (std::is_arithmetic_v<std::decay_t<T>>) {
             ss << value;
         }

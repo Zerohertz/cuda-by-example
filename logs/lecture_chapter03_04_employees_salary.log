@@ -1,0 +1,182 @@
+$ nsys profile --stats=true lecture_04_employees_salary
+Collecting data...
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:21] ✅ cudaMalloc((void **)&dev_salaries, size * sizeof(double))
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:22] ✅ cudaMalloc((void **)&dev_new_salaries, size * sizeof(double))
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:23] ✅ cudaMalloc((void **)&dev_size, sizeof(int))
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:25] ✅ cudaMemcpy(dev_salaries, array_of_salaries, size * sizeof(double), cudaMemcpyHos
+tToDevice)
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:26] ✅ cudaMemcpy(dev_size, &size, sizeof(int), cudaMemcpyHostToDevice)
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:27] ✅ cudaMemcpy(dev_salaries, array_of_salaries, size * sizeof(double), cudaMemcpyHos
+tToDevice)
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:34] ✅ cudaDeviceSynchronize()
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:35] ✅ cudaMemcpy(&new_salaries, dev_new_salaries, size * sizeof(double), cudaMemcpyDev
+iceToHost)
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 25966018358.150002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 37174016552.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 26989942133.750000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 31532517205.400002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 33274883312.149998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 33933589535.000000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 33438140153.750000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 30642215093.750000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 25444798174.399998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 25996108280.600002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 36933064165.399994
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 30788150375.000000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 32485669757.600002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 33088209533.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 25888065514.400002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 33550983422.149998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 34728834686.149994
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 29373199293.350002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 34947726383.750000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 26578577540.000000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 30776598683.750000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 34028115389.600002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 32700887288.149998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 29438152405.399998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 36389796027.349998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 33652790144.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 24397759490.150002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 32818233725.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 32882955152.150002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 36048822935.000000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 37343119431.349998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 33564463594.399998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 26735017899.350002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 35633380341.349998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 26909068310.149998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 33243381473.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 36044263940.150002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 33687755182.400002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 26142059894.149998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 35000745290.149994
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 35802316940.149994
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 26558628728.600002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 31567464125.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 25612744226.150002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 32590742506.400002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 27307226336.150002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 29254503632.600002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 32885483529.350002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 31854371837.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 28614423754.399998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 32760585735.350002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 25822302269.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 32179806046.399998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 36681619429.400002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 28185741560.000000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 32202598340.000000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 35135936643.349998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 27785983403.750000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 28204601093.750000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 36812881760.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 34637087933.750000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 31672283162.150002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 30751871763.349998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 28574342864.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 28290003044.150002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 34142092088.150002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 27891573341.600002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 24592578269.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 31779485269.399998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 31523027093.750000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 33525307640.000000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 34512501335.000000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 33384478813.399998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 27722493411.349998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 28282056260.000000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 34211830366.399998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 26236702126.399998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 30471336255.349998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 24041663061.350002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 30077118941.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 27537729053.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 26028839914.399998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 25847949949.399998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 24811226542.399998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 31032874011.350002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 34505018888.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 31608902660.150002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 32249319946.399998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 26942623845.349998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 27920946608.149998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 34652659017.349998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 25583992118.149998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 33954425326.399998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 35593912119.349998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 31774376300.150002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 31652986724.150002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 34881436929.349998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 24426079433.750000
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 34521423773.599998
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:38] ℹ️ 31601053409.600002
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:41] ✅ cudaFree(dev_salaries)
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:42] ✅ cudaFree(dev_new_salaries)
+[2025-09-22 23:33:26] [src/lecture/chapter03/04_employees_salary.cu:43] ✅ cudaFree(dev_size)
+Generating '/tmp/nsys-report-448b.qdstrm'
+[1/8] [========================100%] report2.nsys-rep
+[2/8] [========================100%] report2.sqlite
+[3/8] Executing 'nvtx_sum' stats report
+SKIPPED: /workspace/build/report2.sqlite does not contain NV Tools Extension (NVTX) data.
+[4/8] Executing 'osrt_sum' stats report
+
+ Time (%)  Total Time (ns)  Num Calls    Avg (ns)      Med (ns)    Min (ns)    Max (ns)      StdDev (ns)            Name         
+ --------  ---------------  ---------  -------------  -----------  --------  -------------  -------------  ----------------------
+     51.3    2,002,854,034      1,657    1,208,723.0     41,713.0     1,358    206,306,930    7,323,838.6  ioctl                 
+     40.9    1,597,834,539         14  114,131,038.5  8,347,212.5     4,331  1,329,701,257  351,114,235.6  poll                  
+      6.6      257,425,261        121    2,127,481.5     14,502.0     2,872     78,285,225   11,288,284.0  open64                
+      1.0       37,476,891        149      251,522.8      4,323.0     1,250     18,000,404    2,055,665.6  fopen                 
+      0.1        5,181,258         46      112,636.0     15,327.0     3,190      3,480,525      510,009.0  mmap64                
+      0.1        3,202,241         10      320,224.1    340,557.5   210,802        411,245       61,350.4  sem_timedwait         
+      0.0          418,033          1      418,033.0    418,033.0   418,033        418,033            0.0  pthread_cond_wait     
+      0.0          307,056          2      153,528.0    153,528.0   122,299        184,757       44,164.5  pthread_create        
+      0.0          301,077         69        4,363.4      4,419.0     1,056         17,131        3,091.8  fclose                
+      0.0          227,401         16       14,212.6      8,515.0     1,365         99,216       23,250.3  mmap                  
+      0.0          137,259         74        1,854.9      1,307.0     1,012         15,602        2,275.3  putc                  
+      0.0          106,666         15        7,111.1      7,692.0     1,564          9,553        2,357.6  read                  
+      0.0           93,300         51        1,829.4      1,569.0     1,037          5,280          873.1  fcntl                 
+      0.0           82,719          5       16,543.8      2,803.0     2,068         64,116       26,856.8  fgets                 
+      0.0           65,722         12        5,476.8      5,620.5     1,829          9,972        2,246.5  write                 
+      0.0           59,902          7        8,557.4      8,918.0     2,236         14,403        4,267.1  open                  
+      0.0           48,316          6        8,052.7      8,690.0     3,419         13,282        3,538.5  munmap                
+      0.0           38,458          2       19,229.0     19,229.0    14,729         23,729        6,364.0  socket                
+      0.0           36,560          3       12,186.7     13,879.0     8,465         14,216        3,227.5  pipe2                 
+      0.0           22,737          3        7,579.0      8,567.0     4,960          9,210        2,290.8  fwrite                
+      0.0           20,565          1       20,565.0     20,565.0    20,565         20,565            0.0  fopen64               
+      0.0           19,504          2        9,752.0      9,752.0     6,432         13,072        4,695.2  pthread_cond_broadcast
+      0.0           14,039          1       14,039.0     14,039.0    14,039         14,039            0.0  connect               
+      0.0            6,194          1        6,194.0      6,194.0     6,194          6,194            0.0  bind                  
+      0.0            3,537          1        3,537.0      3,537.0     3,537          3,537            0.0  listen                
+      0.0            2,852          1        2,852.0      2,852.0     2,852          2,852            0.0  getentropy            
+
+[5/8] Executing 'cuda_api_sum' stats report
+
+ Time (%)  Total Time (ns)  Num Calls    Avg (ns)    Med (ns)   Min (ns)   Max (ns)     StdDev (ns)            Name         
+ --------  ---------------  ---------  ------------  ---------  --------  -----------  -------------  ----------------------
+     99.8      299,628,516          3  99,876,172.0   14,124.0     5,089  299,609,303  172,973,965.5  cudaMalloc            
+      0.1          302,388          3     100,796.0   12,452.0     6,802      283,134      157,934.6  cudaFree              
+      0.1          256,826          1     256,826.0  256,826.0   256,826      256,826            0.0  cudaLaunchKernel      
+      0.0          112,490          4      28,122.5   20,027.5     7,893       64,542       25,844.0  cudaMemcpy            
+      0.0           12,196          1      12,196.0   12,196.0    12,196       12,196            0.0  cudaDeviceSynchronize 
+      0.0           11,787          1      11,787.0   11,787.0    11,787       11,787            0.0  cuModuleGetLoadingMode
+
+[6/8] Executing 'cuda_gpu_kern_sum' stats report
+
+ Time (%)  Total Time (ns)  Instances  Avg (ns)  Med (ns)  Min (ns)  Max (ns)  StdDev (ns)                  Name                 
+ --------  ---------------  ---------  --------  --------  --------  --------  -----------  -------------------------------------
+    100.0            2,048          1   2,048.0   2,048.0     2,048     2,048          0.0  task(const double *, double *, int *)
+
+[7/8] Executing 'cuda_gpu_mem_time_sum' stats report
+
+ Time (%)  Total Time (ns)  Count  Avg (ns)  Med (ns)  Min (ns)  Max (ns)  StdDev (ns)           Operation          
+ --------  ---------------  -----  --------  --------  --------  --------  -----------  ----------------------------
+     53.1            3,040      1   3,040.0   3,040.0     3,040     3,040          0.0  [CUDA memcpy Device-to-Host]
+     46.9            2,688      3     896.0     832.0       800     1,056        139.5  [CUDA memcpy Host-to-Device]
+
+[8/8] Executing 'cuda_gpu_mem_size_sum' stats report
+
+ Total (MB)  Count  Avg (MB)  Med (MB)  Min (MB)  Max (MB)  StdDev (MB)           Operation          
+ ----------  -----  --------  --------  --------  --------  -----------  ----------------------------
+      0.002      3     0.001     0.001     0.000     0.001        0.000  [CUDA memcpy Host-to-Device]
+      0.001      1     0.001     0.001     0.001     0.001        0.000  [CUDA memcpy Device-to-Host]
