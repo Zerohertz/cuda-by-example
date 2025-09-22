@@ -24,7 +24,17 @@ inline std::string generate_output_path(const char *source_file)
         filename = filename.substr(0, dot_pos);
     }
     std::string chapter;
-    size_t      chapter_pos = file_path.find("/chapter");
+    std::string prefix = "";
+
+    // Check if file is in book or lecture directory
+    if (file_path.find("/src/book/") != std::string::npos) {
+        prefix = "book_";
+    }
+    else if (file_path.find("/src/lecture/") != std::string::npos) {
+        prefix = "lecture_";
+    }
+
+    size_t chapter_pos = file_path.find("/chapter");
     if (chapter_pos != std::string::npos) {
         size_t chapter_start = chapter_pos + 1;
         size_t chapter_end   = file_path.find('/', chapter_start);
@@ -35,5 +45,5 @@ inline std::string generate_output_path(const char *source_file)
     if (chapter.empty()) {
         chapter = "unknown";
     }
-    return project_home + "/res/" + chapter + "_" + filename;
+    return project_home + "/res/" + prefix + chapter + "_" + filename;
 }
