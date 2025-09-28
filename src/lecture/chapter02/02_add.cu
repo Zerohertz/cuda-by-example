@@ -45,19 +45,19 @@ void addWithCuda(int *c, const int *a, const int *b, unsigned int size)
 }
 
 /*
- * [2025-09-22 22:28:47] [src/lecture/chapter02/01_add.cu:35] ✅ cudaSetDevice(0)
- * [2025-09-22 22:28:47] [src/lecture/chapter02/01_add.cu:36] ✅ cudaMalloc((void **)&dev_c, size * sizeof(int))
- * [2025-09-22 22:28:47] [src/lecture/chapter02/01_add.cu:37] ✅ cudaMalloc((void **)&dev_a, size * sizeof(int))
- * [2025-09-22 22:28:47] [src/lecture/chapter02/01_add.cu:38] ✅ cudaMalloc((void **)&dev_b, size * sizeof(int))
- * [2025-09-22 22:28:47] [src/lecture/chapter02/01_add.cu:39] ✅ cudaMemcpy(dev_a, a, size * sizeof(int),
+ * [2025-09-22 22:28:47] [src/lecture/chapter02/02_add.cu:35] ✅ cudaSetDevice(0)
+ * [2025-09-22 22:28:47] [src/lecture/chapter02/02_add.cu:36] ✅ cudaMalloc((void **)&dev_c, size * sizeof(int))
+ * [2025-09-22 22:28:47] [src/lecture/chapter02/02_add.cu:37] ✅ cudaMalloc((void **)&dev_a, size * sizeof(int))
+ * [2025-09-22 22:28:47] [src/lecture/chapter02/02_add.cu:38] ✅ cudaMalloc((void **)&dev_b, size * sizeof(int))
+ * [2025-09-22 22:28:47] [src/lecture/chapter02/02_add.cu:39] ✅ cudaMemcpy(dev_a, a, size * sizeof(int),
  * cudaMemcpyHostToDevice)
- * [2025-09-22 22:28:47] [src/lecture/chapter02/01_add.cu:40] ✅ cudaMemcpy(dev_b, b, size * sizeof(int),
+ * [2025-09-22 22:28:47] [src/lecture/chapter02/02_add.cu:40] ✅ cudaMemcpy(dev_b, b, size * sizeof(int),
  * cudaMemcpyHostToDevice)
- * [2025-09-22 22:28:47] [src/lecture/chapter02/01_add.cu:43] ✅ cudaGetLastError()
- * [2025-09-22 22:28:47] [src/lecture/chapter02/01_add.cu:44] ✅ cudaDeviceSynchronize()
- * [2025-09-22 22:28:47] [src/lecture/chapter02/01_add.cu:45] ✅ cudaMemcpy(c, dev_c, size * sizeof(int),
+ * [2025-09-22 22:28:47] [src/lecture/chapter02/02_add.cu:43] ✅ cudaGetLastError()
+ * [2025-09-22 22:28:47] [src/lecture/chapter02/02_add.cu:44] ✅ cudaDeviceSynchronize()
+ * [2025-09-22 22:28:47] [src/lecture/chapter02/02_add.cu:45] ✅ cudaMemcpy(c, dev_c, size * sizeof(int),
  * cudaMemcpyDeviceToHost)
- * [2025-09-22 22:28:47] [src/lecture/chapter02/01_add.cu:22] ℹ️ [1, 2, 3, 4, 5] + [10, 20, 30, 40, 50] = [11, 22, 33,
+ * [2025-09-22 22:28:47] [src/lecture/chapter02/02_add.cu:22] ℹ️ [1, 2, 3, 4, 5] + [10, 20, 30, 40, 50] = [11, 22, 33,
  * 44, 55]
- * [2025-09-22 22:28:48] [src/lecture/chapter02/01_add.cu:24] ✅ cudaDeviceReset()
+ * [2025-09-22 22:28:48] [src/lecture/chapter02/02_add.cu:24] ✅ cudaDeviceReset()
  */
